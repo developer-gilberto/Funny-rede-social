@@ -18,6 +18,7 @@
   "author": "Gilberto Lopes",
   "license": "SEE LICENSE IN README.md",
   "dependencies": {
+    "dotenv": "^16.4.5",
     "express": "^4.19.2"
   },
   "devDependencies": {
