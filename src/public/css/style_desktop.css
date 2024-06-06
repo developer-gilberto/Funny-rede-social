@@ -1,0 +1,241 @@
+@charset "utf-8";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style-type: none;
+    font-family: Arial, Helvetica, sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* LIGHT MODE */
+
+:root{
+    --p: #000;
+    --destaque1: #0075de;
+    --destaque2: #0AFFEB;
+    --destaque3: #004077;
+    --subtitulo: #778899;
+    --secundaria: #1696FF;
+    --bg_primary:#fbfbfe;
+    --bg_second: #f5f5f7;
+    --bg_third: #d3d3d38a;
+    --branco: #fff;
+    --preto: #000;
+}
+
+/* CLASS DARK MODE */
+
+.darkMode:root{
+    --p: #afadad;
+    --destaque1: #0075de;
+    --destaque2: #0AFFEB;
+    --destaque3: #004077;
+    --subtitulo: #778899;
+    --secundaria: #1696FF;
+    --bg_primary: #202124;
+    --bg_second: #2b2a33;
+    --bg_third: #272727;
+    --branco: #000;
+    --preto: #fff;
+}
+
+html, body{
+    overflow-x: hidden;
+    min-height: 100vh;
+    width: 100vw;
+    background-color: var(--bg_primary);
+    transition: .3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header{
+    box-shadow: 0 0 .625rem #000000c3;
+    width: 100%;
+    padding: .3125rem .625rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header #link_logo_funny_header{
+    color: var(--destaque1);
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo_funny{
+    width: 3.125rem;
+}
+
+main{
+    padding: 3.125rem 0;
+    width: 100%;
+}
+
+/* SECTION LOGIN */
+.container_section_login{
+    width: 61.25rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.container_titulo_page_login{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.bem_vindo{
+    color: var(--p);
+}
+
+.container_titulo_page_login h1{
+    color: var(--destaque1);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 3.125rem;
+    font-weight: bold;
+}
+
+.descricao_funny{
+    color: var(--subtitulo);
+}
+
+#form_login{
+    background-color: var(--bg_primary);
+    border: 0.0625rem solid var(--destaque1);
+    box-shadow: 5px 5px 10px #0000002a;
+    border-radius: .625rem;
+    max-width: 31.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2.5rem 1.25rem;
+}
+
+#form_login h2{
+    text-align: center;
+    color: var(--destaque1);
+}
+
+#form_login .inputs_email_senha{
+    background-color: var(--bg_primary);
+    color: var(--p);
+    padding: 0.1875rem 0.3125rem;
+    border: transparent;
+    border-bottom: 0.0625rem solid var(--subtitulo);
+}
+
+#form_login .inputs_email_senha:focus{
+    border-bottom: 0.0625rem solid transparent;
+    outline-style: groove;
+    outline-color: var(--destaque1);
+    border-radius: 0.3125rem;
+}
+
+#form_login .btn_criar_conta{
+    margin-top: 1.25rem;
+    color: var(--subtitulo);
+    width: max-content;
+}
+
+#form_login .btn_criar_conta:hover{
+    text-decoration: underline;
+    color: var(--destaque1);
+}
+
+#form_login .btn_submit_login{
+    background-color: var(--destaque1);
+    color: var(--branco);
+    font-weight: 900;
+    border-radius: 0.3125rem;
+    padding: 0.1875rem 0.3125rem;
+    border: none;
+}
+
+#form_login .btn_submit_login:hover{
+    background-color: var(--secundaria);
+    color: #fff;
+    cursor: pointer;
+}
+
+/* SECTION CRIAR CONTA */
+.container_section_criar_conta{
+    max-width: max-content;
+    margin: 0 auto;
+}
+
+.container_section_criar_conta h2{
+    text-align: center;
+    color: var(--subtitulo);
+}
+
+.container_section_criar_conta h2 strong{
+    color: var(--destaque1);
+    font-weight: bold;
+}
+
+.container_section_criar_conta p{
+    color: var(--subtitulo);
+}
+
+#form_criar_conta{
+    background-color: var(--bg_primary);
+    border: 0.0625rem solid var(--destaque1);
+    box-shadow: 5px 5px 10px #0000002a;
+    margin-top: 1.25rem;
+    border-radius: .625rem;
+    max-width: 31.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2.5rem 1.25rem;
+}
+
+#form_criar_conta .inputs_email_senha{
+    background-color: var(--bg_primary);
+    color: var(--p);
+    padding: 0.1875rem 0.3125rem;
+    border: transparent;
+    border-bottom: 0.0625rem solid var(--subtitulo);
+}
+
+#form_criar_conta .inputs_email_senha:focus{
+    border-bottom: 0.0625rem solid transparent;
+    outline-style: groove;
+    outline-color: var(--destaque1);
+    border-radius: 0.3125rem;
+}
+
+#form_criar_conta .btn_submit_criar_conta{
+    background-color: var(--destaque1);
+    margin-top: .625rem;
+    color: #f5f5f7;
+    font-weight: 900;
+    border-radius: 0.3125rem;
+    padding: 0.1875rem 0.3125rem;
+    border: none;
+}
+
+#form_criar_conta .btn_submit_criar_conta:hover{
+    background-color: var(--secundaria);
+    color: #fff;
+    cursor: pointer;
+}
+
+footer{
+    color: var(--subtitulo);
+    width: 100%;
+    text-align: center;
+}

@@ -1,0 +1,13 @@
+@media screen and (max-width: 980px){
+
+    .container_section_login{
+        max-width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1.25rem;
+    }
+
+    .funny_logo{
+        width: 5rem;
+    }
+}
