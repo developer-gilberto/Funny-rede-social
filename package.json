@@ -1,0 +1,26 @@
+{
+  "name": "funny_beta",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "FUNNY, a rede social divertida.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "keywords": [
+    "funny",
+    "social",
+    "network",
+    "rede",
+    "social"
+  ],
+  "author": "Gilberto Lopes",
+  "license": "SEE LICENSE IN README.md",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.3"
+  }
+}
