@@ -1,20 +1,21 @@
-import '../config.js';
-import express from 'express';
-import router from './router.js';
-import { engine } from 'express-handlebars';
-import path from 'path';
+require("dotenv").config();
+const express = require("express");
+const { engine } = require("express-handlebars");
+const cookieParser = require('cookie-parser');
+const router = require('./router');
 
 const app = express();
 
-const PORT = process.env.PORT || process.env.PORT_DEFAULT;
+app.use(express.json());
+app.use(express.urlencoded({ extended: false}));
+app.use(cookieParser());
 
-const __filename = new URL(import.meta.url).pathname; // Obtém o caminho do arquivo atual a partir do import.meta.url
-const __dirname = path.dirname(__filename); // Usa path.dirname() para obter o diretório do arquivo atual
-
-const staticFileDirectory = path.join(__dirname, 'public');
-app.use(express.static(staticFileDirectory));
+app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/db/uploads"));
 
 app.use(router);
+
+const PORT = process.env.PORT || process.env.PORT_DEFAULT;
 
 app.engine('handlebars', engine({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');

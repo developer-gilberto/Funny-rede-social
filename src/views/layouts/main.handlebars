@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Funny_Beta</title>
     <link rel="shortcut icon" href="/assets/faviconFunny/faviconFunnyBgWhite.ico" type="image/x-icon">
-    <link rel="stylesheet" href="/css/style_desktop.css">
-    <link rel="stylesheet" href="/css/style_mobile.css" media="screen">
+    <link rel="stylesheet" href="/assets/icons/remix_icons/remixicon.css">
+    <link rel="stylesheet" href="/css/styleDesktop.css">
+    <link rel="stylesheet" href="/css/styleMobile.css" media="screen">
     <script defer src="/js/scripts.js"></script>
 </head>
 <body>
@@ -15,6 +16,12 @@
             <img class="logo_funny" src="/assets/logoFunny/logoFunnyBgTransparent/iconFunny192x192.png" alt="Logo Funny">
             Funny&reg;
         </a>
+        {{!--
+        ATENÇÃO =>>> app.use(express.static(__dirname + "/db/uploads"));--}}
+        {{#if img_perfil}}
+            <img id="img_perfil_header" src="/imgProfile/{{img_perfil}}" alt="Foto de perfil">
+        {{/if}}
+        
     </header>
     <main>
         {{{ body }}}
