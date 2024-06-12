@@ -53,9 +53,30 @@ const searchPasswordDB = async (userEmail) => {
 
 const insertUserDB = async (userName, userEmail, encryptedPassword, creationDate) => {
     try {
-        const query = 'INSERT INTO users VALUES (DEFAULT, ?, ?, ?, ?)';
+        const query = 'INSERT INTO users VALUES (DEFAULT, ?, ?, ?, DEFAULT, ?)';
         const results = await connection.execute(query, [userName, userEmail, encryptedPassword, creationDate]);
         return results;
+    } catch (err) {
+        console.error(err);
+        throw new Error;
+    }
+}
+
+const insertPubDB = async (user, textPub, imgPubName, creationDatePub) => {
+    try {
+        const query = 'INSERT INTO pubs VALUES (DEFAULT, ?, ?, ?, ?)';
+        const result = await connection.execute(query, [user, textPub, imgPubName, creationDatePub]);
+        return result;
+    } catch (err) {
+        console.log(err);
+        throw new Error;
+    }
+}
+
+const getPubsByUser = async (userName) => {
+    try {
+        const pubs = await connection.execute('SELECT * FROM pubs WHERE user = ? ORDER BY date_pub DESC', [userName]);
+        return pubs;
     } catch (err) {
         console.error(err);
         throw new Error;
@@ -68,5 +89,7 @@ module.exports = {
     getUserById,
     insertUserDB,
     searchEmailDB,
-    searchPasswordDB
+    searchPasswordDB,
+    insertPubDB,
+    getPubsByUser,
 }

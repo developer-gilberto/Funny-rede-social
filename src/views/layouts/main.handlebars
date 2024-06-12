@@ -16,12 +16,15 @@
             <img class="logo_funny" src="/assets/logoFunny/logoFunnyBgTransparent/iconFunny192x192.png" alt="Logo Funny">
             Funny&reg;
         </a>
-        {{!--
-        ATENÇÃO =>>> app.use(express.static(__dirname + "/db/uploads"));--}}
-        {{#if img_perfil}}
-            <img id="img_perfil_header" src="/imgProfile/{{img_perfil}}" alt="Foto de perfil">
+        {{#if user}}
+        {{!--ATENÇÃO =>>> app.use(express.static(__dirname + "/db/uploads"));--}}
+        {{!-- <img id="img_perfil_header" src="/profilePic/{{profilePic}}" alt="Foto de perfil"> --}}
+            <div class="container_userName_header">
+                <strong class="user_name">{{user.user_name}}</strong> 
+                <i class="edit_profile_icon ri-user-settings-line"></i>
+                <i class="edit_profile_icon ri-chat-3-line"></i>
+            </div>
         {{/if}}
-        
     </header>
     <main>
         {{{ body }}}

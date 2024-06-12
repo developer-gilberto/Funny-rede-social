@@ -1,1 +1,29 @@
-<h1>Bem vindo {{userName}} <i class="ri-account-circle-fill"></i></h1>
+<section class="container_section_home">
+    <h1>Bem vindo</h1>
+    <form id="formPub" action="/publish/{{user.user_name}}" method="post" enctype="multipart/form-data">
+        <textarea name="textPub" id="textAreaPub" placeholder="Publique algo..." rows="5"></textarea>
+        <div class="container_btn_file_submit">
+            <label id="label_file_pub" for="input_file_pub">
+                <i class="default_icons ri-image-add-fill"></i>
+                Selecione uma foto
+            </label>
+            <div id="name_img_pub"></div>
+            <input id="input_file_pub" type="file" name="imgPub" hidden>
+            <input id="btn_submit_pub" type="submit" value="Publicar">
+            {{!-- <input type="file" capture> --}}
+        </div>
+    </form>
+    {{!-- {{#if pubs}} --}}
+        <ul id="container_pub">
+            {{#each pubs}}
+                <li class="pub">
+                    <div class="info_pub">
+                        <p><strong class="user_name_pub">{{user}}</strong></p>
+                        <p class="date_pub">{{date_pub}}</p>
+                        <p class="title_pub">{{msg_pub}}</p>
+                    </div>
+                    <img id="img_pub" src="/imgPub/{{img_pub}}" alt="Foto da publicação">
+                </li>
+            {{/each}}
+        </ul>
+</section>

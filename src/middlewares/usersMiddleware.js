@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
 const usersModel = require('../models/usersModel');
+const path = require('path');
 
 const checkEmailInUse = async (req, res, next) => {
     const { userEmail } = req.body;
@@ -46,7 +47,7 @@ const checkAccountExist = async (req, res, next) => {
 const validatePassword = async (req, res, next) => {
     const { userPassword } = req.body;
     if (!userPassword) {
-        return res.status(401).send('Senha inválida. Acesso negado :(');
+        return res.status(401).send(`EMAIL ou SENHA incorretos.<br>Acesso negado :( <br> Verifique os dados e tente novamente.`);
     }
     return next();
 }
@@ -72,6 +73,8 @@ const generateToken = async (req, res, next) => {
     try {
         const [ user ] = await usersModel.getUserByEmail(userEmail);
         const userId = user[0].id_user;
+        const userName = user[0].user_name;
+        req.params.userName = userName;
         const token = jwt.sign({ id_user: userId }, jwtSecret, { expiresIn: '1d' });//30 = 30s / 600 = 10min / '7d' = 7dias
         res.cookie('auth_token', token, {
             httpOnly: true,
@@ -86,19 +89,43 @@ const generateToken = async (req, res, next) => {
 }
 
 const checkTokenValid = async (req, res, next) => {
+    // const idUserDB = await usersModel.getUserByEmail(req.body.userEmail);
+    // console.log(idUserDB);
     const token = req.cookies.auth_token;
     if (!token) {
         console.log('TOKEN inválido!');
     }
     try {
         const jwtSecret = process.env.JWT_SECRET;
-        const trueToken = await jwt.verify(token, jwtSecret);
-        const userId = trueToken.id_user;
+        const validToken = await jwt.verify(token, jwtSecret);
+        const userId = validToken.id_user;
         req.userData = { userId }
         return next();
     } catch (err) {
         console.error(err);
         return res.status(500).send(`Esta página é restrita. <br>Necessário fazer login.`);
+    }
+}
+
+const uploadImgPub = async (req, res, next) => {
+    // const imgPub = req.files.imgPub.name;
+    req.files.imgPub.mv(path.join(__dirname, '../db/uploads/imgPub', req.files.imgPub.name));
+    return next();
+}
+
+const registerPubDB = async (req, res, next) => {
+    const { textPub } = req.body;
+    const userName = req.params.userName;
+    const imgPubName = req.files.imgPub.name;
+    const creationDatePub = new Date();
+    try { // PEGAR USER PELO ID DA URL PARA PASSAR PARA INSERTPUBDB()
+        const result = await usersModel.insertPubDB(userName, textPub, imgPubName, creationDatePub);
+        // console.log(result[0]);
+        console.log(`> Nova publicação do usuário "${userName}" registrada com sucesso no DB.\n`, result[0]);
+        return next();
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send('Algo deu errado :( <br>Tente novamente mais tarde. <br>' + err);
     }
 }
 
@@ -110,4 +137,6 @@ module.exports =  {
     encryptPassword,
     generateToken,
     checkTokenValid,
+    uploadImgPub,
+    registerPubDB,
  }

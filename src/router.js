@@ -10,15 +10,13 @@ router.get("/createAccount", (req, res) => {
     res.render("pages/createAccount");
 });
 
-router.post(
-    "/registerAccount",
+router.post("/registerAccount",
     usersMiddleware.checkEmailInUse,
     usersMiddleware.encryptPassword,
     usersController.registerAccountDB
 );
 
-router.post(
-    "/login",
+router.post("/login",
     usersMiddleware.checkAccountExist,
     usersMiddleware.validatePassword,
     usersMiddleware.checkPassword,
@@ -26,11 +24,16 @@ router.post(
     usersController.redirectUserHome
 );
 
-router.get("/home",
+router.get("/home/:userName",
     usersMiddleware.checkTokenValid,
     usersController.renderUserHome
 );
 
-router.post("/publish", usersController.pub);
+router.post("/publish/:userName",
+    usersMiddleware.uploadImgPub,
+    usersMiddleware.registerPubDB,
+    usersController.redirectUserHome
+    // usersController.publish
+);
 
 module.exports = router;
