@@ -4,8 +4,8 @@ const usersModel = require('../models/usersModel');
 const path = require('path');
 
 const checkEmailInUse = async (req, res, next) => {
-    const { userEmail } = req.body;
     try {
+        const { userEmail } = req.body;
         const queryResult = await usersModel.searchEmailDB(userEmail);
         if (queryResult.length > 0) {
             return res.status(409).send(`O email <strong>"${userEmail}"</strong> já está em uso.<br>Por favor tente um email diferente.`);
@@ -31,8 +31,8 @@ const encryptPassword = async (req, res, next) => {
 }
 
 const checkAccountExist = async (req, res, next) => {
-    const { userEmail } = req.body;
     try {
+        const { userEmail } = req.body;
         const queryResult = await usersModel.searchEmailDB(userEmail);
         if (queryResult.length > 0) {
             return next();
@@ -45,16 +45,21 @@ const checkAccountExist = async (req, res, next) => {
 }
 
 const validatePassword = async (req, res, next) => {
-    const { userPassword } = req.body;
-    if (!userPassword) {
-        return res.status(401).send(`EMAIL ou SENHA incorretos.<br>Acesso negado :( <br> Verifique os dados e tente novamente.`);
+    try {
+        const { userPassword } = req.body;
+        if (!userPassword) {
+            return res.status(401).send(`EMAIL ou SENHA incorretos.<br>Acesso negado :( <br> Verifique os dados e tente novamente.`);
+        }
+        return next();
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send('Algo deu errado :( <br>Tente novamente mais tarde. <br>' + err);
     }
-    return next();
 }
 
 const checkPassword = async (req, res, next) => {
-    const { userEmail, userPassword } = req.body;
     try {
+        const { userEmail, userPassword } = req.body;
         const encryptedPasswordDB = await usersModel.searchPasswordDB(userEmail);
         const ifPasswordTrue = await bcrypt.compare(userPassword, encryptedPasswordDB);
         if (ifPasswordTrue) {
@@ -68,9 +73,9 @@ const checkPassword = async (req, res, next) => {
 }
 
 const generateToken = async (req, res, next) => {
-    const { userEmail } = req.body;
-    const jwtSecret = process.env.JWT_SECRET;
     try {
+        const { userEmail } = req.body;
+        const jwtSecret = process.env.JWT_SECRET;
         const [ user ] = await usersModel.getUserByEmail(userEmail);
         const userId = user[0].id_user;
         const userName = user[0].user_name;
@@ -108,23 +113,41 @@ const checkTokenValid = async (req, res, next) => {
 }
 
 const uploadImgPub = async (req, res, next) => {
-    // const imgPub = req.files.imgPub.name;
-    req.files.imgPub.mv(path.join(__dirname, '../db/uploads/imgPub', req.files.imgPub.name));
-    return next();
+    try {
+        // const imgPub = req.files.imgPub.name;
+        if (!req.files || !req.files.imgPub) {
+            if (!req.files) {
+                req.files = {}
+            }
+            req.files.imgPub = {name: null};
+            return next();
+        }
+        req.files.imgPub.mv(path.join(__dirname, '../db/uploads/imgPub', req.files.imgPub.name));
+        return next();
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send('Algo deu errado :( <br>Tente novamente mais tarde. <br>' + err);
+    }
 }
 
 const registerPubDB = async (req, res, next) => {
-    const { textPub } = req.body;
-    const userName = req.params.userName;
-    const imgPubName = req.files.imgPub.name;
-    const creationDatePub = new Date();
     try { // PEGAR USER PELO ID DA URL PARA PASSAR PARA INSERTPUBDB()
+        let { textPub } = req.body;
+        if (!textPub) {
+            textPub = null;
+        }
+        if (!textPub && !req.files.imgPub.name) {
+            return next();
+        }
+        const userName = req.params.userName;
+        const imgPubName = req.files.imgPub.name;
+        const creationDatePub = new Date();
         const result = await usersModel.insertPubDB(userName, textPub, imgPubName, creationDatePub);
         // console.log(result[0]);
         console.log(`> Nova publicação do usuário "${userName}" registrada com sucesso no DB.\n`, result[0]);
         return next();
     } catch (err) {
-        console.log(err);
+        console.error(err);
         return res.status(500).send('Algo deu errado :( <br>Tente novamente mais tarde. <br>' + err);
     }
 }
