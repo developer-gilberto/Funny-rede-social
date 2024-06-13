@@ -114,7 +114,6 @@ const checkTokenValid = async (req, res, next) => {
 
 const uploadImgPub = async (req, res, next) => {
     try {
-        // const imgPub = req.files.imgPub.name;
         if (!req.files || !req.files.imgPub) {
             if (!req.files) {
                 req.files = {}
@@ -141,10 +140,8 @@ const registerPubDB = async (req, res, next) => {
         }
         const userName = req.params.userName;
         const imgPubName = req.files.imgPub.name;
-        const creationDatePub = new Date();
-        const result = await usersModel.insertPubDB(userName, textPub, imgPubName, creationDatePub);
-        // console.log(result[0]);
-        console.log(`> Nova publicação do usuário "${userName}" registrada com sucesso no DB.\n`, result[0]);
+        const creationDatePub = new Date().toLocaleString();
+        await usersModel.insertPubDB(userName, textPub, imgPubName, creationDatePub);
         return next();
     } catch (err) {
         console.error(err);

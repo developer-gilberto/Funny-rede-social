@@ -1,10 +1,10 @@
 <section class="container_section_home">
-    <h1>Bem vindo</h1>
+    <h1>Bem vindo <strong class="welcome_user_name">{{user.user_name}}</strong></h1>
     <form id="formPub" action="/publish/{{user.user_name}}" method="post" enctype="multipart/form-data">
         <textarea name="textPub" id="textAreaPub" placeholder="Publique algo..." rows="5"></textarea>
         <div class="container_btn_file_submit">
             <label id="label_file_pub" for="input_file_pub">
-                <i class="default_icons ri-image-add-fill"></i>
+                <i class="select_img_icon ri-image-add-fill"></i>
                 Selecione uma foto
             </label>
             <div id="name_img_pub"></div>
@@ -18,11 +18,14 @@
             {{#each pubs}}
                 <li class="pub">
                     <div class="info_pub">
-                        <p><strong class="user_name_pub">{{user}}</strong></p>
+                        {{!-- <p><strong class="user_name_pub">{{user}}</strong></p> --}}
+                        <a href="#"><strong class="user_name_pub">{{user}}</strong></a>
                         <p class="date_pub">{{date_pub}}</p>
                         <p class="title_pub">{{msg_pub}}</p>
                     </div>
-                    <img id="img_pub" src="/imgPub/{{img_pub}}" alt="Ops, foto não encontrada :(">
+                    {{#if img_pub}}
+                        <img id="img_pub" src="/imgPub/{{img_pub}}" alt="Ops, imagem não encontrada :(">
+                    {{/if}}
                 </li>
             {{/each}}
         </ul>

@@ -4,7 +4,7 @@ const registerAccountDB = async (req, res) => {
     try {
         const { userName, userEmail } = req.body;
         const encryptedPassword = req.encryptedPassword;
-        const creationDate = new Date();
+        const creationDate = new Date().toLocaleString();
         const [ results ] = await usersModel.insertUserDB(userName, userEmail, encryptedPassword, creationDate);
         console.log(`> Usuário "${userName}" registrado com sucesso no DB.\n`, results);
         res.status(300).redirect('/');
@@ -33,7 +33,6 @@ const renderUserHome = async (req, res) => {
         const [ queryResultPubs ] = await usersModel.getPubsByUser(user.user_name);
         const pubs = queryResultPubs;
         res.render('pages/home', { user, pubs });
-        // res.render('pages/home', { user });
     } catch (err) {
         console.error(err);
         return res.status(500).send('Algo deu errado :( <br>Tente novamente mais tarde. <br>' + err);
