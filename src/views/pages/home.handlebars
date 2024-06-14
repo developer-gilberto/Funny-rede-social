@@ -8,7 +8,7 @@
         </li>
     </ul>
     <h1>Bem vindo(a) <strong class="welcome_user_name">{{user.user_name}}</strong></h1>
-    <form id="formPub" action="/publish/{{user.user_name}}" method="post" enctype="multipart/form-data">
+    <form id="formPub" action="/publish/{{user.user_name}}" method="post" enctype="multipart/form-data" spellcheck="false">
         <textarea name="textPub" id="textAreaPub" placeholder="Publique algo..." rows="5"></textarea>
         <div class="container_btn_file_submit">
             <label id="label_file_pub" for="input_file_pub">

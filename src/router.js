@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const fileUpload = require("express-fileupload");
+const authServices = require("./services/authServices");
 const usersMiddleware = require("./middlewares/usersMiddleware");
 const usersController = require("./controllers/usersController");
 
@@ -8,17 +9,17 @@ router.use(fileUpload());
 
 // GET
 router.get("/createAccount", 
-    usersController.renderCreateAccount
+    usersController.loadCreateAccount
 );
 
-router.get("/profile/:userName", //
-    usersMiddleware.checkTokenValid,
-    usersController.renderUserProfile
+router.get("/profile/:userName",
+    authServices.authorizeUser,
+    usersController.loadUserProfile
 );
 
 router.get("/home",
-    usersMiddleware.checkTokenValid,
-    usersController.renderUserHome
+    authServices.authorizeUser,
+    usersController.loadUserHome
 );
 
 router.get("/logout/:userName",
@@ -27,25 +28,24 @@ router.get("/logout/:userName",
 
 // POST
 router.post("/registerAccount",
-    usersMiddleware.checkEmailInUse,
+    usersMiddleware.checkIfEmailInUse,
     usersMiddleware.encryptPassword,
     usersController.registerAccountDB
 );
 
 router.post("/login",
-    usersMiddleware.validateUserEmailAndPassword,
-    usersMiddleware.checkAccountExist,
-    usersMiddleware.checkPassword,
-    usersMiddleware.generateToken,
+    usersMiddleware.validateEmailAndPassword,
+    usersMiddleware.checkIfAccountExist,
+    usersMiddleware.checkIfPasswordTrue,
+    authServices.authenticateUser,
     usersController.redirectUserHome
 );
 
 router.post("/publish/:userName",
-    usersMiddleware.checkTokenValid,
+    authServices.authorizeUser,
     usersMiddleware.uploadImgPub,
     usersMiddleware.registerPubDB,
     usersController.redirectUserHome
-    // usersController.publish
 );
 
 module.exports = router;

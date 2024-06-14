@@ -18,7 +18,7 @@ const redirectUserHome = (req, res) => {
     return res.status(300).redirect(`/home`);
 }
 
-const renderUserHome = async (req, res) => {
+const loadUserHome = async (req, res) => {
     const { userId } = req.userData;
     try {
         const [ queryResult ] = await usersModel.getUserById(userId);// FAZER JOIN DA TABELA USERS COM PUBS
@@ -32,7 +32,7 @@ const renderUserHome = async (req, res) => {
     }
 }
 
-const renderUserProfile = async (req, res) => {
+const loadUserProfile = async (req, res) => {
     const userName = req.params.userName;
     try {
         const [ queryResult ] = await usersModel.getUserByUserName(userName);
@@ -47,7 +47,7 @@ const renderUserProfile = async (req, res) => {
     }
 }
         
-const renderCreateAccount = (req, res) => {
+const loadCreateAccount = (req, res) => {
     return res.status(200).render("pages/createAccount");
 }
 
@@ -56,28 +56,11 @@ const logout = (req, res) => {
     return res.status(200).render('pages/login', { userName });
 }
 
-
-
-// const publish = async (req, res) => {
-//     try {
-        // const { userName, img_perfil } = req.userData;
-        // POSSO PEGAR O ID DO USER QUE ESTÁ NA URL
-        // const { textPub } = req.body;
-        // const imgPub = req.files.imgPub.name;
-//         const userName = req.params.userName;
-//         res.status(300).redirect(`/home/${userName}`);
-//     } catch (err) {
-//         console.error(err);
-//         return res.status(500).send('Algo deu errado :( <br>Tente novamente mais tarde. <br>' + err);
-//     }
-// }
-
 module.exports = {
     registerAccountDB,
     redirectUserHome,
-    renderUserHome,
-    renderUserProfile,
-    renderCreateAccount,
+    loadUserHome,
+    loadUserProfile,
+    loadCreateAccount,
     logout,
-    // publish
 }
