@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil {{user.user_name}}</title>
+</head>
+<body>
+    <section class="container_section_profile">
+        <div class="container_profile_pic">
+            <img id="profilePic"
+                {{#if profilePic}}
+                    src="/profilePic/{{profilePic}}"
+                {{else}}
+                    src="/assets/img/defaultProfileImg.png"
+                {{/if}}
+            alt="Ops, imagem não encontrada :(">
+            <h1><strong class="welcome_user_name">{{user.user_name}}</strong></h1>
+            <a href="#">Editar foto de perfil <i class="ri-pencil-line"></i></a>
+        </div>
+{{!-- MOSTRAR PUBS COM GRID LAYOUT --}}
+        <ul id="container_pub">
+            {{#each pubs}}
+                <li class="pub">
+                    <div class="info_pub">
+                        <a href="#"><strong class="user_name_pub">{{user}}</strong></a>
+                        <p class="date_pub">{{date_pub}}</p>
+                        <p class="title_pub">{{msg_pub}}</p>
+                    </div>
+                    {{#if img_pub}}
+                        <img id="img_pub" src="/imgPub/{{img_pub}}" alt="Ops, imagem não encontrada :(">
+                    {{/if}}
+                </li>
+            {{/each}}
+        </ul>
+        {{!-- <i class="btn_go_top ri-arrow-up-s-line"></i> --}}
+    </section>
+</body>
+</html>

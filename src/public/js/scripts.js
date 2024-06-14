@@ -1,8 +1,25 @@
-console.log("FUNNY: Hello world!");
+console.log("FUNNY > Hello world!");
 
-const inputFilePub = document.querySelector('#input_file_pub');
-const nameImgPub = document.querySelector('#name_img_pub');
+document.querySelector('#input_file_pub').addEventListener('change', () => {
+    document.querySelector('#name_img_pub').textContent = document.querySelector('#input_file_pub').value;
+});
 
-inputFilePub.addEventListener('change', () => {
-    nameImgPub.textContent = inputFilePub.value;
+document.querySelector('#icon_config_profile').addEventListener('click', () => {
+    console.log('clicou');
+    document.querySelector('#menu_config_profile').classList.toggle('showMenu');
+});
+
+window.document.addEventListener('scroll', () => {
+    if (scrollY >= 900) {
+        document.querySelector('.btn_go_top').style.display = 'block';
+    } else {
+        document.querySelector('.btn_go_top').style.display = 'none';
+    }
+});
+
+document.querySelector('.btn_go_top').addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
 });

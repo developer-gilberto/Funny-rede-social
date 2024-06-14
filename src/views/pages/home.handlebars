@@ -1,5 +1,13 @@
 <section class="container_section_home">
-    <h1>Bem vindo <strong class="welcome_user_name">{{user.user_name}}</strong></h1>
+    <ul id="menu_config_profile">
+        <li class="items_menu_profile">
+            <a href="/profile/{{user.user_name}}">Meu perfil</a>
+        </li>
+        <li class="items_menu_profile">
+            <a href="/logout/{{user.user_name}}">Sair</a>
+        </li>
+    </ul>
+    <h1>Bem vindo(a) <strong class="welcome_user_name">{{user.user_name}}</strong></h1>
     <form id="formPub" action="/publish/{{user.user_name}}" method="post" enctype="multipart/form-data">
         <textarea name="textPub" id="textAreaPub" placeholder="Publique algo..." rows="5"></textarea>
         <div class="container_btn_file_submit">
@@ -26,7 +34,13 @@
                     {{#if img_pub}}
                         <img id="img_pub" src="/imgPub/{{img_pub}}" alt="Ops, imagem não encontrada :(">
                     {{/if}}
+                    <div class="container_btns_like">
+                        <i class="btns_like_comment ri-thumb-up-line"></i>
+                        <i class="btns_like_comment ri-thumb-down-line"></i>
+                        <i class="btns_like_comment ri-message-2-line"></i>
+                    </div>
                 </li>
             {{/each}}
         </ul>
+        <i class="btn_go_top ri-arrow-up-s-line"></i>
 </section>

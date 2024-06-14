@@ -30,6 +30,16 @@ const getUserById = async (idUser) => {
     }
 }
 
+const getUserByUserName = async (userName) => {
+    try {
+        const user = await connection.execute('SELECT * FROM users WHERE user_name = ?', [userName]);
+        return user;
+    } catch (err) {
+        console.error(err);
+        throw new Error;
+    }
+}
+
 const searchEmailDB = async (userEmail) => {
     try {
         const [ queryResult ] = await connection.execute('SELECT user_email FROM users WHERE user_email = ?', [userEmail]);
@@ -52,8 +62,8 @@ const searchPasswordDB = async (userEmail) => {
 }
 
 const insertUserDB = async (userName, userEmail, encryptedPassword, creationDate) => {
+    const query = 'INSERT INTO users VALUES (DEFAULT, ?, ?, ?, DEFAULT, ?)';
     try {
-        const query = 'INSERT INTO users VALUES (DEFAULT, ?, ?, ?, DEFAULT, ?)';
         const results = await connection.execute(query, [userName, userEmail, encryptedPassword, creationDate]);
         return results;
     } catch (err) {
@@ -63,8 +73,8 @@ const insertUserDB = async (userName, userEmail, encryptedPassword, creationDate
 }
 
 const insertPubDB = async (user, textPub, imgPubName, creationDatePub) => {
+    const query = 'INSERT INTO pubs VALUES (DEFAULT, ?, ?, ?, ?)';
     try {
-        const query = 'INSERT INTO pubs VALUES (DEFAULT, ?, ?, ?, ?)';
         const result = await connection.execute(query, [user, textPub, imgPubName, creationDatePub]);
         return result;
     } catch (err) {
@@ -73,9 +83,10 @@ const insertPubDB = async (user, textPub, imgPubName, creationDatePub) => {
     }
 }
 
-const getPubsByUser = async (userName) => {
+const getPubsByUserName = async (userName) => {
+    const query = 'SELECT * FROM pubs WHERE user = ? ORDER BY date_pub DESC';
     try {
-        const pubs = await connection.execute('SELECT * FROM pubs WHERE user = ? ORDER BY date_pub DESC', [userName]);
+        const pubs = await connection.execute(query, [userName]);
         return pubs;
     } catch (err) {
         console.error(err);
@@ -87,9 +98,10 @@ module.exports = {
     getAllUsers,
     getUserByEmail,
     getUserById,
+    getUserByUserName,
     insertUserDB,
     searchEmailDB,
     searchPasswordDB,
     insertPubDB,
-    getPubsByUser,
+    getPubsByUserName,
 }

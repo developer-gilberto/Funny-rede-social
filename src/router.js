@@ -6,10 +6,26 @@ const usersController = require("./controllers/usersController");
 
 router.use(fileUpload());
 
-router.get("/createAccount", (req, res) => {
-    res.render("pages/createAccount");
-});
+// GET
+router.get("/createAccount", 
+    usersController.renderCreateAccount
+);
 
+router.get("/profile/:userName", //
+    usersMiddleware.checkTokenValid,
+    usersController.renderUserProfile
+);
+
+router.get("/home",
+    usersMiddleware.checkTokenValid,
+    usersController.renderUserHome
+);
+
+router.get("/logout/:userName",
+    usersController.logout //EXCLUIR O TOKEN
+);
+
+// POST
 router.post("/registerAccount",
     usersMiddleware.checkEmailInUse,
     usersMiddleware.encryptPassword,
@@ -17,19 +33,15 @@ router.post("/registerAccount",
 );
 
 router.post("/login",
+    usersMiddleware.validateUserEmailAndPassword,
     usersMiddleware.checkAccountExist,
-    usersMiddleware.validatePassword,
     usersMiddleware.checkPassword,
     usersMiddleware.generateToken,
     usersController.redirectUserHome
 );
 
-router.get("/home/:userName",
-    usersMiddleware.checkTokenValid,
-    usersController.renderUserHome
-);
-
 router.post("/publish/:userName",
+    usersMiddleware.checkTokenValid,
     usersMiddleware.uploadImgPub,
     usersMiddleware.registerPubDB,
     usersController.redirectUserHome

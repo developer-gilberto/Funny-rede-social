@@ -57,6 +57,7 @@ html, body{
 header{
     box-shadow: 0 0 .625rem #000000c3;
     width: 100%;
+    height: 3.75rem;
     padding: .3125rem .625rem;
     display: flex;
     justify-content: space-between;
@@ -236,6 +237,39 @@ main{
 
 /* SECTION HOME */
 
+#menu_config_profile{
+    background-color: var(--branco);
+    border: 1px solid var(--secundaria);
+    padding: 1.25rem;
+    position: absolute;
+    top: 3.8125rem;
+    right: -18.75rem;
+    transition: .3s ease;
+}
+
+.items_menu_profile{
+    margin: .625rem 0;
+}
+
+.items_menu_profile a{
+    color: var(--subtitulo);
+    font-size: 1.2rem;
+}
+
+.items_menu_profile a:hover{
+    color: var(--destaque1);
+    text-decoration: underline;
+}
+
+#icon_config_profile:hover{
+    cursor: pointer;
+    color: var(--destaque1);
+}
+    
+#menu_config_profile.showMenu{
+    right: 0;
+}
+
 .select_img_icon{
     color: var(--destaque1);
     font-size: 1.125rem;
@@ -272,7 +306,7 @@ main{
     font-weight: bold;
 }
 
-.edit_profile_icon{
+.default_icon{
     color: var(--subtitulo);
     font-size: 1.875rem;
 }
@@ -404,6 +438,60 @@ main{
     padding: .3125rem;
     object-fit: cover;
     margin: 0 auto;
+}
+
+.container_btns_like{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+    
+.btns_like_comment{
+    color: var(--subtitulo);
+    font-size: 1.5625rem;
+}
+
+.btns_like_comment:hover{
+    cursor: pointer;
+    color: var(--destaque1);
+}
+
+/* SECTION PROFILE */
+
+.container_section_profile{
+    background-color: lightblue;
+    max-width: 43.75rem;
+    margin: 0 auto;
+    min-height: 100vh;
+}
+
+.container_profile_pic{
+    background-color: lightgray;
+    text-align: center;
+}
+
+#profilePic{
+    background-color: #d3d3d3;
+    border: 1px solid var(--secundaria);
+    /* border-radius: 50%; */
+    width: 12.5rem;
+    height: 12.5rem;
+    object-fit: cover;
+}
+
+
+.btn_go_top{
+    display: none;
+    color: var(--destaque1);
+    font-size: 3rem;
+    position: fixed;
+    bottom: 1.25rem;
+    right: 1.25rem;
+}
+
+.btn_go_top:hover{
+    cursor: pointer;
+    color: var(--secundaria);
 }
 
 footer{
