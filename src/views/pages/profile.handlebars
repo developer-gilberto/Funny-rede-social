@@ -27,7 +27,11 @@
         </button>
     </div>
 
-    {{#if pubs}}<p id="publicacoes_user">Publicações:</p>{{/if}}
+    {{#if pubs}}
+        <p id="publicacoes_user">Publicações:</p>
+    {{else}}
+        <p id="publicacoes_user">Você não publicou nada ainda</p>
+    {{/if}}
     <ul id="container_pub_profile">
         {{#each pubs}}
             <li id="pub_profile">

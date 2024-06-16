@@ -1,5 +1,5 @@
 const usersModel = require("../models/usersModel");
-const jwt = require('jsonwebtoken');
+const authServices = require('../services/checkIfTokenIsValid');
 
 const registerAccountDB = async (req, res) => {
     const { userName, userEmail } = req.body;
@@ -25,10 +25,8 @@ const redirectUserProfile = (req, res) => {
 
 const loadUserHome = async (req, res) => {
     const token = req.cookies.auth_token;
-    const jwtSecret = process.env.JWT_SECRET;
     try {
-        const validToken = await jwt.verify(token, jwtSecret);
-        const userId = validToken.id_user;
+        const userId = await authServices.checkIfTokenIsValid(token);
         const [ queryResult ] = await usersModel.getUserById(userId);
         const user = queryResult[0];
         const [ queryResultPubs ] = await usersModel.getPubsByUserId(userId);
@@ -42,10 +40,8 @@ const loadUserHome = async (req, res) => {
 
 const loadUserProfile = async (req, res) => {
     const token = req.cookies.auth_token;
-    const jwtSecret = process.env.JWT_SECRET;
     try {
-        const validToken = await jwt.verify(token, jwtSecret);
-        const userId = validToken.id_user;
+        const userId = await authServices.checkIfTokenIsValid(token);
         const [ queryResult ] = await usersModel.getUserById(userId);
         const user = queryResult[0];
         const [ queryResultPubs ] = await usersModel.getPubsByUserId(userId);

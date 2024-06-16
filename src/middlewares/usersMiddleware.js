@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const usersModel = require('../models/usersModel');
+const authServices = require('../services/checkIfTokenIsValid');
 const path = require('path');
-const jwt = require('jsonwebtoken');
 
 const checkIfEmailInUse = async (req, res, next) => {
     const { userEmail } = req.body;
@@ -101,10 +101,8 @@ const registerPubDB = async (req, res, next) => {
     const imgPubName = req.files.imgPub.name;
     const creationDatePub = new Date().toLocaleString();
     const token = req.cookies.auth_token;
-    const jwtSecret = process.env.JWT_SECRET;
     try {
-        const validToken = await jwt.verify(token, jwtSecret);
-        const userId = validToken.id_user;
+        const userId = await authServices.checkIfTokenIsValid(token);
         await usersModel.insertPubDB(userId, textPub, imgPubName, creationDatePub);
         return next();
     } catch (err) {
@@ -136,10 +134,8 @@ const updateNewProfilePicDB = async (req, res, next) => {
         return next();
     }
     const token = req.cookies.auth_token;
-    const jwtSecret = process.env.JWT_SECRET;
     try {
-        const validToken = await jwt.verify(token, jwtSecret);
-        const userId = validToken.id_user;
+        const userId = await authServices.checkIfTokenIsValid(token);
         await usersModel.updateProfilePicDB(userId, newProfilePic);
         return next();
     } catch (err) {
@@ -157,10 +153,8 @@ const updateNewProfileNameDB = async (req, res, next) => {
         return next();
     }
     const token = req.cookies.auth_token;
-    const jwtSecret = process.env.JWT_SECRET;
     try {
-        const validToken = await jwt.verify(token, jwtSecret);
-        const userId = validToken.id_user;
+        const userId = await authServices.checkIfTokenIsValid(token);
         await usersModel.updateUserNameDB(userId, newProfileName);
         return next();
     } catch (err) {
