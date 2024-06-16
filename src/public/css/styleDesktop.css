@@ -358,6 +358,12 @@ main{
     margin: .625rem 0;
 }
 
+.icons_menu{
+    color: var(--destaque1);
+    font-size: 1.3rem;
+    margin-right: .3125rem;
+}
+
 .items_menu_profile a{
     color: var(--subtitulo);
     font-size: 1.2rem;
@@ -407,12 +413,17 @@ main{
     text-transform: uppercase;
 }
 
-#profilePic_home{
-    width: 3.75rem;
-    height: 3.75rem;
+#profilePic_header{
+    width: 2.5rem;
+    height: 2.5rem;
     object-fit: cover;
-    border: 1px solid var(--subtitulo);
+    border: 2px solid var(--subtitulo);
     border-radius: 50%;
+}
+
+#profilePic_header:hover{
+    cursor: pointer;
+    border: 2px solid var(--secundaria);
 }
 
 .container_userName_header{
@@ -593,6 +604,10 @@ main{
 
 .container_profile_pic{
     /* background-color: lightgray; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
 }
 
@@ -607,26 +622,60 @@ main{
 
 #form_profilePic{
     /* background-color: lightblue; */
+    max-width: fit-content;
     margin-top: .625rem;
-    display: flex;
+
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: .3125rem;
+    gap: .625rem;
+}
+
+#form_profilePic.showFormEditProfile{
+    display: flex;
+}
+
+#inputNewProfileName{
+    background-color: #FFF;
+    color: var(--p);
+    border: 1px solid var(--bg_third);
+    border-radius: .3125rem;
+    /* border: none; */
+    padding: .3125rem;
+    font-size: 1rem;
+}
+
+#inputNewProfileName:focus{
+    outline-style: groove;
+    outline-color: var(--destaque1);
 }
 
 #label_file_profilePic{
+    background-color: #FFF;
+    width: 100%;
     color: var(--subtitulo);
     border: 1px solid var(--bg_third);
+    border-radius: .3125rem;
     padding: .3125rem;
+    font-size: 1rem;
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     gap: 0.3125rem;
 }
     
 #label_file_profilePic:hover{
     cursor: pointer;
+}
+
+.container_btns_send_edit_profile{
+    /* background-color: lightblue; */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.3125rem;
 }
 
 #btn_submit_profilePic{
@@ -644,6 +693,42 @@ main{
 #btn_submit_profilePic:hover{
     background-color: var(--destaque1);
     cursor: pointer;
+}
+
+#btn_cancel_submit_profilePic{
+    background-color: var(--subtitulo);
+    color: #FFF;
+    font-size: .875rem;
+    font-weight: bold;
+    letter-spacing: .125rem;
+    border-radius: 0.3125rem;
+    padding: .3125rem .625rem;
+    margin-top: .3125rem;
+    border: 1px solid transparent;
+}
+
+#btn_cancel_submit_profilePic:hover{
+    background-color: #686868;
+    cursor: pointer;
+    border: 1px solid var(--secundaria);
+}
+
+#btn_editProfile{
+    background-color: transparent;
+    color: var(--subtitulo);
+    font-size: .875rem;
+    font-weight: bold;
+    letter-spacing: .125rem;
+    border-radius: 0.3125rem;
+    padding: .3125rem .625rem;
+    margin-top: .625rem;
+    border: none;
+}
+
+#btn_editProfile:hover{
+    cursor: pointer;
+    color: var(--secundaria);
+    text-decoration: underline;
 }
 
 #publicacoes_user{

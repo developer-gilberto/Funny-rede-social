@@ -1,13 +1,6 @@
 <section class="container_section_home">
     <div class="container_boas_vindas_home">
         <h1>Bem vindo(a) <strong class="welcome_user_name">{{user.user_name}}</strong></h1>
-        <img id="profilePic_home"
-            {{#if user.profile_pic}}
-                src="/profilePic/{{user.profile_pic}}"
-            {{else}}
-                src="/assets/img/defaultProfileImg.png"
-            {{/if}}
-        alt="Ops, imagem não encontrada :(">
     </div>
     <form id="formPub" action="/publish" method="post" enctype="multipart/form-data" spellcheck="false">
         <textarea name="textPub" id="textAreaPub" placeholder="Publique algo..." rows="5"></textarea>

@@ -80,10 +80,21 @@ const getPubsByUserId = async (userId) => {
     }
 }
 
-const updateProfilePicDB = async (userId, profilePicName) => {
+const updateProfilePicDB = async (userId, newProfilePic) => {
     const query = 'UPDATE users SET profile_pic = ? WHERE id_user = ?'
     try {
-        const result = await connection.execute(query, [profilePicName, userId]);
+        const result = await connection.execute(query, [newProfilePic, userId]);
+        return result;
+    } catch (err) {
+        console.error(err);
+        throw new Error;
+    }
+}
+
+const updateUserNameDB = async (userId, newProfileName) => {
+    const query = 'UPDATE users SET user_name = ? WHERE id_user = ?'
+    try {
+        const result = await connection.execute(query, [newProfileName, userId]);
         return result;
     } catch (err) {
         console.error(err);
@@ -99,5 +110,6 @@ module.exports = {
     searchPasswordDB,
     insertPubDB,
     getPubsByUserId,
-    updateProfilePicDB
+    updateProfilePicDB,
+    updateUserNameDB
 }

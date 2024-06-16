@@ -23,6 +23,7 @@ router.get("/home",
 );
 
 router.get("/logout",
+    authServices.authorizeUser,
     authServices.logout
 );
 
@@ -48,9 +49,11 @@ router.post("/publish",
     usersController.redirectUserHome
 );
 
-router.post("/sendProfilePic",
+router.post("/editProfile",
+    authServices.authorizeUser,
     usersMiddleware.uploadProfilePic,
-    usersMiddleware.registerProfilePicDB,
+    usersMiddleware.updateNewProfilePicDB,
+    usersMiddleware.updateNewProfileNameDB,
     usersController.redirectUserProfile
 );
 

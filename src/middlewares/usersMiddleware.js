@@ -130,17 +130,38 @@ const uploadProfilePic = async (req, res, next) => {
     }
 }
 
-const registerProfilePicDB = async (req, res, next) => {
-    let profilePicName = req.files.profilePic.name;
-    if (!profilePicName) {
-        return res.status(300).redirect('/profile');
+const updateNewProfilePicDB = async (req, res, next) => {
+    let newProfilePic = req.files.profilePic.name;
+    if (!newProfilePic) {
+        return next();
     }
     const token = req.cookies.auth_token;
     const jwtSecret = process.env.JWT_SECRET;
     try {
         const validToken = await jwt.verify(token, jwtSecret);
         const userId = validToken.id_user;
-        await usersModel.updateProfilePicDB(userId, profilePicName);
+        await usersModel.updateProfilePicDB(userId, newProfilePic);
+        return next();
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send('Algo deu errado :( <br>Tente novamente mais tarde. <br>' + err);
+    }
+}
+
+const updateNewProfileNameDB = async (req, res, next) => {
+    let { newProfileName } = req.body;
+    if (!newProfileName) {
+        return next();
+    }
+    if (!newProfileName && !req.files.profilePic.name) {
+        return next();
+    }
+    const token = req.cookies.auth_token;
+    const jwtSecret = process.env.JWT_SECRET;
+    try {
+        const validToken = await jwt.verify(token, jwtSecret);
+        const userId = validToken.id_user;
+        await usersModel.updateUserNameDB(userId, newProfileName);
         return next();
     } catch (err) {
         console.error(err);
@@ -157,5 +178,6 @@ module.exports =  {
     uploadImgPub,
     registerPubDB,
     uploadProfilePic,
-    registerProfilePicDB,
+    updateNewProfilePicDB,
+    updateNewProfileNameDB
  }

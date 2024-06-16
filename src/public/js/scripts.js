@@ -20,6 +20,11 @@ function showMenu() {
     document.querySelector('#menu_config_profile').classList.toggle('showMenu');
 }
 
+function showFormEditProfile() {
+    document.querySelector('#name_profilePic_profile').textContent = '';
+    document.querySelector('#form_profilePic').classList.toggle('showFormEditProfile');
+}
+
 function goTop() {
     window.scrollTo({
         top: 0,
