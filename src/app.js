@@ -4,6 +4,8 @@ const { engine } = require("express-handlebars");
 const cookieParser = require('cookie-parser');
 const router = require('./router');
 
+const path = require('path');
+
 const app = express();
 
 app.use(express.json());
@@ -17,7 +19,10 @@ app.use(router);
 
 const PORT = process.env.PORT || process.env.PORT_DEFAULT;
 
-app.engine('handlebars', engine({defaultLayout: 'main'}));
+app.engine('handlebars', engine({
+    partialsDir: path.join(__dirname, 'views/partials'),
+    defaultLayout: 'main'
+}));
 app.set('view engine', 'handlebars');
 app.set('views', './src/views');
 

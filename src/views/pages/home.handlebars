@@ -1,14 +1,15 @@
 <section class="container_section_home">
-    <ul id="menu_config_profile">
-        <li class="items_menu_profile">
-            <a href="/profile/{{user.user_name}}">Meu perfil</a>
-        </li>
-        <li class="items_menu_profile">
-            <a href="/logout/{{user.user_name}}">Sair</a>
-        </li>
-    </ul>
-    <h1>Bem vindo(a) <strong class="welcome_user_name">{{user.user_name}}</strong></h1>
-    <form id="formPub" action="/publish/{{user.user_name}}" method="post" enctype="multipart/form-data" spellcheck="false">
+    <div class="container_boas_vindas_home">
+        <h1>Bem vindo(a) <strong class="welcome_user_name">{{user.user_name}}</strong></h1>
+        <img id="profilePic_home"
+            {{#if user.profile_pic}}
+                src="/profilePic/{{user.profile_pic}}"
+            {{else}}
+                src="/assets/img/defaultProfileImg.png"
+            {{/if}}
+        alt="Ops, imagem não encontrada :(">
+    </div>
+    <form id="formPub" action="/publish" method="post" enctype="multipart/form-data" spellcheck="false">
         <textarea name="textPub" id="textAreaPub" placeholder="Publique algo..." rows="5"></textarea>
         <div class="container_btn_file_submit">
             <label id="label_file_pub" for="input_file_pub">
@@ -16,31 +17,29 @@
                 Selecione uma foto
             </label>
             <div id="name_img_pub"></div>
-            <input id="input_file_pub" type="file" name="imgPub" hidden>
+            <input onchange="showValueInputFilePub()" id="input_file_pub" type="file" name="imgPub" hidden>
             <input id="btn_submit_pub" type="submit" value="Publicar">
             {{!-- <input type="file" capture> --}}
         </div>
     </form>
-    {{!-- {{#if pubs}} --}}
-        <ul id="container_pub">
-            {{#each pubs}}
-                <li class="pub">
-                    <div class="info_pub">
-                        {{!-- <p><strong class="user_name_pub">{{user}}</strong></p> --}}
-                        <a href="#"><strong class="user_name_pub">{{user}}</strong></a>
-                        <p class="date_pub">{{date_pub}}</p>
-                        <p class="title_pub">{{msg_pub}}</p>
-                    </div>
-                    {{#if img_pub}}
-                        <img id="img_pub" src="/imgPub/{{img_pub}}" alt="Ops, imagem não encontrada :(">
-                    {{/if}}
-                    <div class="container_btns_like">
-                        <i class="btns_like_comment ri-thumb-up-line"></i>
-                        <i class="btns_like_comment ri-thumb-down-line"></i>
-                        <i class="btns_like_comment ri-message-2-line"></i>
-                    </div>
-                </li>
-            {{/each}}
-        </ul>
-        <i class="btn_go_top ri-arrow-up-s-line"></i>
+    <ul id="container_pub">
+        {{#each pubs}}
+            <li class="pub">
+                <div class="info_pub">
+                    <a href="#"><strong class="user_name_pub">{{user}}</strong></a>
+                    <p class="title_pub">{{text_pub}}</p>
+                    <p class="date_pub">{{date_pub}}</p>
+                </div>
+                {{#if img_pub}}
+                    <img id="img_pub" src="/imgPub/{{img_pub}}" alt="Ops, imagem não encontrada :(">
+                {{/if}}
+                <div class="container_btns_like">
+                    <i class="btns_like_comment ri-thumb-up-line"></i>
+                    <i class="btns_like_comment ri-thumb-down-line"></i>
+                    <i class="btns_like_comment ri-message-2-line"></i>
+                </div>
+            </li>
+        {{/each}}
+    </ul>
+    <i onclick="goTop()" class="btn_go_top ri-arrow-up-s-line"></i>
 </section>

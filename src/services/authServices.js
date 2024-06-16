@@ -30,15 +30,13 @@ const authenticateUser = async (req, res, next) => {
 }
 
 const authorizeUser = async (req, res, next) => {
-    const token = req.cookies && req.cookies.auth_token ? req.cookies.auth_token : null;
+    const token = req.cookies.auth_token;
     if (!token) {
         console.log('TOKEN inválido!\nPara acessar, é necessário fazer Login');
     }
     const jwtSecret = process.env.JWT_SECRET;
     try {
-        const validToken = await jwt.verify(token, jwtSecret);
-        const userId = validToken.id_user;
-        req.userData = { userId }
+        await jwt.verify(token, jwtSecret);
         return next();
     } catch (err) {
         console.error(err);
@@ -46,7 +44,17 @@ const authorizeUser = async (req, res, next) => {
     }
 }
 
+const logout = (req, res) => {
+    res.cookie('auth_token', '', {
+        httpOnly: true,
+        secure: true,
+        expires: new Date(0)
+    });
+    return res.status(300).redirect('/');
+}
+
 module.exports = {
     authenticateUser,
-    authorizeUser
+    authorizeUser,
+    logout
 }

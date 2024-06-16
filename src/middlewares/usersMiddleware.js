@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const usersModel = require('../models/usersModel');
 const path = require('path');
+const jwt = require('jsonwebtoken');
 
 const checkIfEmailInUse = async (req, res, next) => {
     const { userEmail } = req.body;
@@ -97,11 +98,49 @@ const registerPubDB = async (req, res, next) => {
     if (!textPub && !req.files.imgPub.name) {
         return next();
     }
-    const userName = req.params.userName;
     const imgPubName = req.files.imgPub.name;
     const creationDatePub = new Date().toLocaleString();
+    const token = req.cookies.auth_token;
+    const jwtSecret = process.env.JWT_SECRET;
     try {
-        await usersModel.insertPubDB(userName, textPub, imgPubName, creationDatePub);
+        const validToken = await jwt.verify(token, jwtSecret);
+        const userId = validToken.id_user;
+        await usersModel.insertPubDB(userId, textPub, imgPubName, creationDatePub);
+        return next();
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send('Algo deu errado :( <br>Tente novamente mais tarde. <br>' + err);
+    }
+}
+
+const uploadProfilePic = async (req, res, next) => {
+    if (!req.files || !req.files.profilePic) {
+        if (!req.files) {
+            req.files = {}
+        }
+        req.files.profilePic = {name: null};
+        return next();
+    }
+    try {
+        await req.files.profilePic.mv(path.join(__dirname, '../db/uploads/profilePic', req.files.profilePic.name));
+        return next();
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send('Algo deu errado :( <br>Tente novamente mais tarde. <br>' + err);
+    }
+}
+
+const registerProfilePicDB = async (req, res, next) => {
+    let profilePicName = req.files.profilePic.name;
+    if (!profilePicName) {
+        return res.status(300).redirect('/profile');
+    }
+    const token = req.cookies.auth_token;
+    const jwtSecret = process.env.JWT_SECRET;
+    try {
+        const validToken = await jwt.verify(token, jwtSecret);
+        const userId = validToken.id_user;
+        await usersModel.updateProfilePicDB(userId, profilePicName);
         return next();
     } catch (err) {
         console.error(err);
@@ -117,4 +156,6 @@ module.exports =  {
     encryptPassword,
     uploadImgPub,
     registerPubDB,
+    uploadProfilePic,
+    registerProfilePicDB,
  }

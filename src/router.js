@@ -12,7 +12,7 @@ router.get("/createAccount",
     usersController.loadCreateAccount
 );
 
-router.get("/profile/:userName",
+router.get("/profile",
     authServices.authorizeUser,
     usersController.loadUserProfile
 );
@@ -22,8 +22,8 @@ router.get("/home",
     usersController.loadUserHome
 );
 
-router.get("/logout/:userName",
-    usersController.logout //EXCLUIR O TOKEN
+router.get("/logout",
+    authServices.logout
 );
 
 // POST
@@ -41,11 +41,17 @@ router.post("/login",
     usersController.redirectUserHome
 );
 
-router.post("/publish/:userName",
+router.post("/publish",
     authServices.authorizeUser,
     usersMiddleware.uploadImgPub,
     usersMiddleware.registerPubDB,
     usersController.redirectUserHome
+);
+
+router.post("/sendProfilePic",
+    usersMiddleware.uploadProfilePic,
+    usersMiddleware.registerProfilePicDB,
+    usersController.redirectUserProfile
 );
 
 module.exports = router;

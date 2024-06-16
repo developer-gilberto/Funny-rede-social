@@ -1,13 +1,4 @@
-console.log("FUNNY > Hello world!");
-
-document.querySelector('#input_file_pub').addEventListener('change', () => {
-    document.querySelector('#name_img_pub').textContent = document.querySelector('#input_file_pub').value;
-});
-
-document.querySelector('#icon_config_profile').addEventListener('click', () => {
-    console.log('clicou');
-    document.querySelector('#menu_config_profile').classList.toggle('showMenu');
-});
+console.log("FUNNY, Hello world!");
 
 window.document.addEventListener('scroll', () => {
     if (scrollY >= 900) {
@@ -17,9 +8,21 @@ window.document.addEventListener('scroll', () => {
     }
 });
 
-document.querySelector('.btn_go_top').addEventListener('click', () => {
+function showValueInputFilePub() {
+    document.querySelector('#name_img_pub').textContent = document.querySelector('#input_file_pub').value;
+}
+
+function showValueInputFileProfilePic() {
+    document.querySelector('#name_profilePic_profile').textContent = document.querySelector('#input_profile_pic').value;
+}
+
+function showMenu() {
+    document.querySelector('#menu_config_profile').classList.toggle('showMenu');
+}
+
+function goTop() {
     window.scrollTo({
         top: 0,
         behavior: 'smooth'
     });
-});
+}

@@ -1,12 +1,120 @@
 @charset "utf-8";
 
+.poppins-thin {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.poppins-extralight {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.poppins-light {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poppins-medium {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.poppins-semibold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.poppins-bold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.poppins-extrabold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.poppins-black {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.poppins-thin-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.poppins-extralight-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.poppins-light-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.poppins-regular-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.poppins-medium-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.poppins-semibold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.poppins-bold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.poppins-extrabold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.poppins-black-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
     list-style-type: none;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Poppins", Arial, Helvetica, sans-serif;
     scroll-behavior: smooth;
 }
 
@@ -102,7 +210,6 @@ main{
 
 .container_titulo_page_login h1{
     color: var(--destaque1);
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 3.125rem;
     font-weight: bold;
 }
@@ -283,6 +390,13 @@ main{
     min-height: 100vh;
 }
 
+.container_boas_vindas_home{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .625rem;
+}
+
 .container_section_home h1{
     color: var(--subtitulo);
     text-align: center;
@@ -290,6 +404,15 @@ main{
 
 .welcome_user_name{
     color: var(--destaque1);
+    text-transform: uppercase;
+}
+
+#profilePic_home{
+    width: 3.75rem;
+    height: 3.75rem;
+    object-fit: cover;
+    border: 1px solid var(--subtitulo);
+    border-radius: 50%;
 }
 
 .container_userName_header{
@@ -381,7 +504,6 @@ main{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* background-color: lightblue; */
 }
 
 .pub{
@@ -430,6 +552,8 @@ main{
 }
 
 #img_pub{
+    /* max-width: 42.3rem;
+    height: 42.3rem; */
     /* width: 31.25rem;
     height: 31.25rem; */
     width: 100%;
@@ -459,26 +583,104 @@ main{
 /* SECTION PROFILE */
 
 .container_section_profile{
-    background-color: lightblue;
-    max-width: 43.75rem;
+    /* background-color: lightblue; */
+    padding: .625rem;
+    /* max-width: 67.5rem; */
+    max-width: 87.5rem;
     margin: 0 auto;
     min-height: 100vh;
 }
 
 .container_profile_pic{
-    background-color: lightgray;
+    /* background-color: lightgray; */
     text-align: center;
 }
 
-#profilePic{
+#profilePic_profile{
     background-color: #d3d3d3;
     border: 1px solid var(--secundaria);
-    /* border-radius: 50%; */
+    border-radius: 50%;
     width: 12.5rem;
     height: 12.5rem;
     object-fit: cover;
 }
 
+#form_profilePic{
+    /* background-color: lightblue; */
+    margin-top: .625rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .3125rem;
+}
+
+#label_file_profilePic{
+    color: var(--subtitulo);
+    border: 1px solid var(--bg_third);
+    padding: .3125rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3125rem;
+}
+    
+#label_file_profilePic:hover{
+    cursor: pointer;
+}
+
+#btn_submit_profilePic{
+    background-color: var(--secundaria);
+    color: #FFF;
+    font-size: .875rem;
+    font-weight: bold;
+    letter-spacing: .125rem;
+    border-radius: 0.3125rem;
+    padding: .3125rem .625rem;
+    margin-top: .3125rem;
+    border: none;
+}
+
+#btn_submit_profilePic:hover{
+    background-color: var(--destaque1);
+    cursor: pointer;
+}
+
+#publicacoes_user{
+    color: var(--destaque1);
+    font-size: 1.125rem;
+    font-weight: bold;
+    margin: 1.25rem 0;
+}
+
+#container_pub_profile{
+    /* background-color: lightcoral; */
+    
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr));
+    gap: 1rem;
+    max-width: 87.5rem;
+    margin: 0 auto;
+    /* padding: 1rem; */
+}
+
+#pub_profile{
+    /* background-color: lightgoldenrodyellow; */
+    border: 1px solid var(--subtitulo);
+    border-radius: .3125rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+#img_pub_profile{
+    border: 1px solid var(--subtitulo);
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+}
 
 .btn_go_top{
     display: none;
@@ -498,4 +700,55 @@ footer{
     color: var(--subtitulo);
     width: 100%;
     text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.logomarca{
+    color: transparent;
+}
+
+.logo-animado{
+    font-size: 1.2em;
+    color: transparent;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-animado:hover{
+    color: var(--destaque1);
+    transition: 0.3s ease-in-out;
+}
+
+.developer{ 
+    color: var(--subtitulo);
+    font-weight: 500;
+    font-style: italic;
+}
+
+.gilberto{ 
+    color: var(--destaque1);
+    font-weight: bold;
+    font-style: italic;
+}
+
+.maior-menor{
+    -webkit-text-stroke: 1px var(--destaque1);
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.maior-menor:hover{
+    color: varvar(--destaque1);
+}
+
+.registrada{
+    color: var(--destaque1);
 }

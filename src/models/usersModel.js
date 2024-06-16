@@ -1,15 +1,5 @@
 const connection = require('../db/connection');
 
-const getAllUsers = async () => {
-    try {
-        const allUsers = await connection.execute('SELECT * FROM users');
-        return allUsers;
-    } catch (err) {
-        console.error(err);
-        throw new Error;
-    }
-}
-
 const getUserByEmail = async (userEmail) => {
     try {
         const user = await connection.execute('SELECT * FROM users WHERE user_email = ?', [userEmail]);
@@ -23,16 +13,6 @@ const getUserByEmail = async (userEmail) => {
 const getUserById = async (idUser) => {
     try {
         const user = await connection.execute('SELECT * FROM users WHERE id_user = ?', [idUser]);
-        return user;
-    } catch (err) {
-        console.error(err);
-        throw new Error;
-    }
-}
-
-const getUserByUserName = async (userName) => {
-    try {
-        const user = await connection.execute('SELECT * FROM users WHERE user_name = ?', [userName]);
         return user;
     } catch (err) {
         console.error(err);
@@ -72,10 +52,10 @@ const insertUserDB = async (userName, userEmail, encryptedPassword, creationDate
     }
 }
 
-const insertPubDB = async (user, textPub, imgPubName, creationDatePub) => {
+const insertPubDB = async (userId, textPub, imgPubName, creationDatePub) => {
     const query = 'INSERT INTO pubs VALUES (DEFAULT, ?, ?, ?, ?)';
     try {
-        const result = await connection.execute(query, [user, textPub, imgPubName, creationDatePub]);
+        const result = await connection.execute(query, [userId, textPub, imgPubName, creationDatePub]);
         return result;
     } catch (err) {
         console.log(err);
@@ -83,10 +63,16 @@ const insertPubDB = async (user, textPub, imgPubName, creationDatePub) => {
     }
 }
 
-const getPubsByUserName = async (userName) => {
-    const query = 'SELECT * FROM pubs WHERE user = ? ORDER BY date_pub DESC';
+const getPubsByUserId = async (userId) => {
+    const query = `
+        SELECT pubs.id_pub, pubs.text_pub, pubs.img_pub, pubs.date_pub
+        FROM pubs
+        INNER JOIN users ON pubs.id_user = users.id_user
+        WHERE users.id_user = ?
+        ORDER BY date_pub DESC
+    `
     try {
-        const pubs = await connection.execute(query, [userName]);
+        const pubs = await connection.execute(query, [userId]);
         return pubs;
     } catch (err) {
         console.error(err);
@@ -94,14 +80,24 @@ const getPubsByUserName = async (userName) => {
     }
 }
 
+const updateProfilePicDB = async (userId, profilePicName) => {
+    const query = 'UPDATE users SET profile_pic = ? WHERE id_user = ?'
+    try {
+        const result = await connection.execute(query, [profilePicName, userId]);
+        return result;
+    } catch (err) {
+        console.error(err);
+        throw new Error;
+    }
+}
+
 module.exports = {
-    getAllUsers,
     getUserByEmail,
     getUserById,
-    getUserByUserName,
     insertUserDB,
     searchEmailDB,
     searchPasswordDB,
     insertPubDB,
-    getPubsByUserName,
+    getPubsByUserId,
+    updateProfilePicDB
 }

@@ -1,0 +1,22 @@
+<header>
+    <a id="link_logo_funny_header" href="/home">
+        <img class="logo_funny" src="/assets/logoFunny/logoFunnyBgTransparent/iconFunny192x192.png" alt="Logo Funny">
+        Funny&reg;
+    </a>
+    {{#if user}}
+        <div class="container_userName_header">
+            <strong class="user_name">{{user.user_name}}</strong> 
+            <i onclick="showMenu()" id="icon_config_profile" class="default_icon ri-user-settings-line"></i>
+            <i class="default_icon ri-chat-3-line"></i>
+        </div>
+    {{/if}}
+
+    <ul id="menu_config_profile">
+        <li class="items_menu_profile">
+            <a href="/profile">Meu perfil</a>
+        </li>
+        <li class="items_menu_profile">
+            <a href="/logout">Sair</a>
+        </li>
+    </ul>
+</header>

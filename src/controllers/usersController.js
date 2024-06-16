@@ -1,4 +1,5 @@
 const usersModel = require("../models/usersModel");
+const jwt = require('jsonwebtoken');
 
 const registerAccountDB = async (req, res) => {
     const { userName, userEmail } = req.body;
@@ -12,18 +13,25 @@ const registerAccountDB = async (req, res) => {
         console.error(err);
         return res.status(500).send('Algo deu errado :( <br>Tente novamente mais tarde. <br>' + err);
     }
-};
+}
 
 const redirectUserHome = (req, res) => {
     return res.status(300).redirect(`/home`);
 }
 
+const redirectUserProfile = (req, res) => {
+    return res.status(300).redirect('/profile');
+}
+
 const loadUserHome = async (req, res) => {
-    const { userId } = req.userData;
+    const token = req.cookies.auth_token;
+    const jwtSecret = process.env.JWT_SECRET;
     try {
-        const [ queryResult ] = await usersModel.getUserById(userId);// FAZER JOIN DA TABELA USERS COM PUBS
+        const validToken = await jwt.verify(token, jwtSecret);
+        const userId = validToken.id_user;
+        const [ queryResult ] = await usersModel.getUserById(userId);
         const user = queryResult[0];
-        const [ queryResultPubs ] = await usersModel.getPubsByUserName(user.user_name);
+        const [ queryResultPubs ] = await usersModel.getPubsByUserId(userId);
         const pubs = queryResultPubs;
         res.render('pages/home', { user, pubs });
     } catch (err) {
@@ -33,14 +41,16 @@ const loadUserHome = async (req, res) => {
 }
 
 const loadUserProfile = async (req, res) => {
-    const userName = req.params.userName;
+    const token = req.cookies.auth_token;
+    const jwtSecret = process.env.JWT_SECRET;
     try {
-        const [ queryResult ] = await usersModel.getUserByUserName(userName);
+        const validToken = await jwt.verify(token, jwtSecret);
+        const userId = validToken.id_user;
+        const [ queryResult ] = await usersModel.getUserById(userId);
         const user = queryResult[0];
-        const [ queryResultPubs ] = await usersModel.getPubsByUserName(userName);
+        const [ queryResultPubs ] = await usersModel.getPubsByUserId(userId);
         const pubs = queryResultPubs;
         return res.status(200).render('pages/profile', { user, pubs });
-        // return res.status(300).redirect(`/profile?user=${user}&pubs=${pubs}`);
     } catch (err) {
         console.error(err);
         return res.status(500).send('Algo deu errado :( <br>Tente novamente mais tarde. <br>' + err);
@@ -51,16 +61,11 @@ const loadCreateAccount = (req, res) => {
     return res.status(200).render("pages/createAccount");
 }
 
-const logout = (req, res) => {
-    const userName = req.params.userName;
-    return res.status(200).render('pages/login', { userName });
-}
-
 module.exports = {
     registerAccountDB,
     redirectUserHome,
+    redirectUserProfile,
     loadUserHome,
     loadUserProfile,
     loadCreateAccount,
-    logout,
 }
