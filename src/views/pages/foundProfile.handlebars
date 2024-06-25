@@ -1,0 +1,33 @@
+<section class="container_section_foundProfiles">
+    <form id="form_searchProfileDB" action="/searchProfile" method="post">
+        <input type="search" name="nameProfile" id="input_searchUserProfileName" placeholder="Procurar amigos">
+        <label for="input_clear_field_searchProfile">
+            <i class="icon_clear_field_searchProfile ri-close-fill"></i>
+        </label>
+        <input id="input_clear_field_searchProfile" type="reset" value="x" hidden>
+        <label for="input_submit_searchProfile">
+            <i id="icon_searchProfile" class="icons_menu ri-search-line"></i>
+        </label>
+        <input id="input_submit_searchProfile" type="submit" value="Procurar" hidden>
+    </form>
+
+
+    <h2 class="h2_foundProfile">Pessoas encontradas:</h2>
+        <ul id="list_foundProfiles">
+            {{#each users}}
+                <li>
+                    <img id="img_foundProfile"
+                        {{#if profile_pic}}
+                            src="/profilePic/{{profile_pic}}" 
+                        {{else}}
+                            src="/assets/img/defaultProfileImg.png"
+                        {{/if}}
+                    alt="Foto não encontrada">
+                
+                    <a id="userProfile_foundProfile" href="/userProfile?id_user={{id_user}}">
+                        <strong>{{user_name}}</strong>
+                    </a>
+                </li>
+            {{/each}}
+        </ul>
+</section>

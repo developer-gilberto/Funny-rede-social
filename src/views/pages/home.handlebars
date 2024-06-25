@@ -1,15 +1,58 @@
 <section class="container_section_home">
-    <div class="container_boas_vindas_home">
-        <h1>Bem vindo(a) <strong class="welcome_user_name">{{user.user_name}}</strong></h1>
-    </div>
+    {{#if user}}
+        <div class="container_userName_header">
+            <strong class="user_name">{{user.user_name}}</strong> 
+            <img onclick="showMenu()" id="profilePic_header"
+                {{#if user.profile_pic}}
+                    src="/profilePic/{{user.profile_pic}}"
+                {{else}}
+                    src="/assets/img/defaultProfileImg.png"
+                {{/if}}
+            alt="Ops, imagem não encontrada :(">
+        </div>
+    {{/if}}
+
+    <ul id="menu_config_profile">
+        <li class="items_menu_profile">
+            <i class="icons_menu ri-home-2-line"></i>
+            <a href="/home">Home</a>
+        </li>
+        <li class="items_menu_profile">
+            <i class="icons_menu ri-user-line"></i>
+            <a href="/myProfile">Meu perfil</a>
+        </li>
+        <li class="items_menu_profile">
+            <i class="icons_menu ri-question-answer-line"></i>
+            <a >Mensagens</a>
+        </li>
+        <li class="items_menu_profile">
+            <i class="icon_exit icons_menu ri-contract-left-line"></i>
+            <a href="/logout">Sair/Logout</a>
+        </li>
+    </ul>
+
+    <form id="form_searchProfileDB" action="/searchProfile" method="post">
+        <input type="search" name="nameProfile" id="input_searchUserProfileName" placeholder="Procurar amigos">
+        <label for="input_clear_field_searchProfile">
+            <i class="icon_clear_field_searchProfile ri-close-fill"></i>
+        </label>
+        <input id="input_clear_field_searchProfile" type="reset" value="x" hidden>
+        <label for="input_submit_searchProfile">
+            <i id="icon_searchProfile" class="icons_menu ri-search-line"></i>
+        </label>
+        <input id="input_submit_searchProfile" type="submit" value="Procurar" hidden>
+    </form>
+
     <form id="formPub" action="/publish" method="post" enctype="multipart/form-data" spellcheck="false">
         <textarea name="textPub" id="textAreaPub" placeholder="Publique algo..." rows="5"></textarea>
         <div class="container_btn_file_submit">
-            <label id="label_file_pub" for="input_file_pub">
-                <i class="select_img_icon ri-image-add-fill"></i>
-                Selecione uma foto
-            </label>
-            <div id="name_img_pub"></div>
+            <div class="container_selecionar_foto">
+                <label id="label_file_pub" for="input_file_pub">
+                    <i class="select_img_icon ri-image-add-fill"></i>
+                    Selecione uma foto
+                </label>
+                <div id="name_img_pub"></div>
+            </div>
             <input onchange="showValueInputFilePub()" id="input_file_pub" type="file" name="imgPub" hidden>
             <input id="btn_submit_pub" type="submit" value="Publicar">
             {{!-- <input type="file" capture> --}}
@@ -19,7 +62,9 @@
         {{#each pubs}}
             <li class="pub">
                 <div class="info_pub">
-                    <a href="#"><strong class="user_name_pub">{{user}}</strong></a>
+                    <a href="/userProfile?id_user={{@root.user.id_user}}">
+                        <strong class="user_name_pub">{{@root.user.user_name}}</strong>
+                    </a>
                     <p class="title_pub">{{text_pub}}</p>
                     <p class="date_pub">{{date_pub}}</p>
                 </div>

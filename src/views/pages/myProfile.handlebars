@@ -28,14 +28,17 @@
     </div>
 
     {{#if pubs}}
-        <p id="publicacoes_user">Publicações:</p>
+        <h3 id="publicacoes_user">Minhas publicações:</h3>
     {{else}}
-        <p id="publicacoes_user">Você não publicou nada ainda</p>
+        <div style="text-align: center;">
+            <p id="publicacoes_user">Por enquanto, você não tem nenhuma publicação...</p>
+            <img src="/assets/gifs/john_travolta.gif">
+        </div>
     {{/if}}
     <ul id="container_pub_profile">
         {{#each pubs}}
             <li id="pub_profile">
-                <div class="info_pub">
+                <div class="container_info_pub">
                     <p class="title_pub">{{text_pub}}</p>
                     <p class="date_pub">{{date_pub}}</p>
                 </div>

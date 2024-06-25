@@ -12,7 +12,7 @@ router.get("/createAccount",
     usersController.loadCreateAccount
 );
 
-router.get("/profile",
+router.get("/myProfile",
     authServices.authorizeUser,
     usersController.loadUserProfile
 );
@@ -54,6 +54,26 @@ router.post("/editProfile",
     usersMiddleware.uploadProfilePic,
     usersMiddleware.updateNewProfilePicDB,
     usersMiddleware.updateNewProfileNameDB,
+    usersController.redirectMyProfile
+);
+
+router.get("/userProfile",
+    authServices.authorizeUser,
+    usersMiddleware.getUserProfileDB,
+    usersMiddleware.getUserProfilePubsDB,
+    usersMiddleware.getDataFriendship,
+    usersController.renderUserProfile
+);
+
+router.post("/searchProfile",
+    authServices.authorizeUser,
+    usersMiddleware.searchAllUsersDB,
+    usersController.renderFoundProfiles
+);
+
+router.get("/addFriend",
+    authServices.authorizeUser,
+    usersMiddleware.sendRequestFriendship,
     usersController.redirectUserProfile
 );
 

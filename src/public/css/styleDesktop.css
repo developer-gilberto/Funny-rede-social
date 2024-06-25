@@ -163,7 +163,8 @@ html, body{
 }
 
 header{
-    box-shadow: 0 0 .625rem #000000c3;
+    /* box-shadow: 0 0 .625rem #000000c3; */
+    box-shadow: 0 0 .3125rem #a8a8a8;
     width: 100%;
     height: 3.75rem;
     padding: .3125rem .625rem;
@@ -185,6 +186,7 @@ header #link_logo_funny_header{
 }
 
 main{
+    /* background-color: lightblue; */
     padding: 3.125rem 1.25rem;
     width: 100%;
 }
@@ -251,9 +253,16 @@ main{
     border-radius: 0.3125rem;
 }
 
-#form_login .btn_criar_conta{
-    margin-top: 1.25rem;
+.nao_tem_conta_funny{
+    font-size: .93rem;
+    margin-top: 1.2rem;
     color: var(--subtitulo);
+}
+
+#form_login .btn_criar_conta{
+    color: var(--secundaria);
+    font-weight: bold;
+    margin-top: 1.25rem;
     width: max-content;
 }
 
@@ -275,6 +284,18 @@ main{
     background-color: var(--secundaria);
     color: #fff;
     cursor: pointer;
+}
+
+/* PAGE FUCKED */
+
+.section_user_fucked{
+    /* background-color: lightblue; */
+    text-align: center;
+}
+
+#gif_se_fudeu{
+    width: 200px;
+    max-width: 100%;
 }
 
 /* SECTION CRIAR CONTA */
@@ -326,6 +347,17 @@ main{
     border-radius: 0.3125rem;
 }
 
+.container_checkBoxCreateAccount{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .3125rem;
+}
+
+.container_checkBoxCreateAccount #checkBoxCreateAccount:hover{
+    cursor: pointer;
+}
+
 #form_criar_conta .btn_submit_criar_conta{
     background-color: var(--destaque1);
     margin-top: .625rem;
@@ -342,6 +374,17 @@ main{
     cursor: pointer;
 }
 
+/* SECTION EMAIL USED */
+
+.section_email_used{
+    text-align: center;
+}
+
+#homem-aranha-meme{
+    max-width: 100%;
+    margin-top: 1.25rem;
+}
+
 /* SECTION HOME */
 
 #menu_config_profile{
@@ -355,6 +398,7 @@ main{
 }
 
 .items_menu_profile{
+    padding: .3125rem;
     margin: .625rem 0;
 }
 
@@ -362,6 +406,10 @@ main{
     color: var(--destaque1);
     font-size: 1.3rem;
     margin-right: .3125rem;
+}
+
+.icon_exit{
+    color: #dd1414;
 }
 
 .items_menu_profile a{
@@ -391,13 +439,109 @@ main{
 .container_section_home{
     /* background-color: var(--bg_third); */
     /* max-width: 61.25rem; */
+    /* position: relative; */
     max-width: 43.75rem;
     margin: 0 auto;
     min-height: 100vh;
 }
 
-.container_boas_vindas_home{
+#form_searchProfileDB{
+    /* background-color: lightblue; */
+    /* max-width: fit-content; */
+    max-width: 100%;
+    margin: 0 auto;
+
     display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .3125rem;
+    border: 1px solid var(--subtitulo);
+    border-radius: .3125rem;
+    outline-color: var(--destaque1);
+}
+
+.h2_notFound{
+    color: var(--destaque1);
+}
+
+#input_searchUserProfileName{
+    width: 100%;
+    padding: .3125rem;
+    border: none;
+    border-radius: .3125rem;
+}
+
+#input_searchUserProfileName:focus{
+    border: 1px solid var(--destaque1);
+    outline-style: groove;
+    outline-color: var(--destaque1);
+}
+
+.icon_clear_field_searchProfile{
+    color: var(--subtitulo);
+    margin: 0 .3125rem;
+}
+
+.icon_clear_field_searchProfile:hover{
+    cursor: pointer;
+    color: var(--secundaria);
+}
+
+#icon_searchProfile:hover{
+    cursor: pointer;
+    color: var(--secundaria);
+}
+
+.container_section_foundProfiles{
+    max-width: 45rem;
+    margin: 0 auto;
+}
+
+.h2_foundProfile{
+    margin: 1.25rem 0;
+    color: var(--subtitulo);
+}
+
+/* #list_foundProfiles{
+
+} */
+
+#list_foundProfiles li{
+    background-color: var(--bg_third);
+    padding: .625rem;
+    border-radius: .625rem;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: .3125rem;
+    margin: .625rem 0;
+}
+
+#img_foundProfile{
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid var(--subtitulo);
+    margin: 0 .625rem;
+}
+
+#userProfile_foundProfile{
+    color: var(--destaque1);
+    font-size: 18px;
+    text-transform: capitalize;
+}
+
+#userProfile_foundProfile:hover{
+    cursor: pointer;
+    color: var(--secundaria);
+    text-decoration: underline;
+}
+
+.container_boas_vindas_home{
+    /* background-color: lightblue; */
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: .625rem;
@@ -417,18 +561,25 @@ main{
     width: 2.5rem;
     height: 2.5rem;
     object-fit: cover;
-    border: 2px solid var(--subtitulo);
+    border: 2px solid transparent;
     border-radius: 50%;
+    transition: .1s ease;
 }
 
 #profilePic_header:hover{
     cursor: pointer;
     border: 2px solid var(--secundaria);
+    /* transform: scale(1.2); */
 }
 
 .container_userName_header{
+    /* background-color: lightgoldenrodyellow; */
+    position: absolute;
+    top: .625rem;
+    right: .625rem;
+
     display: flex;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
     gap: .625rem;
     /* background-color: lightcoral; */
@@ -437,6 +588,7 @@ main{
 .container_userName_header .user_name{
     color: var(--destaque1);
     text-transform: uppercase;
+    font-size: 18px;
     font-weight: bold;
 }
 
@@ -461,21 +613,31 @@ main{
     resize: vertical;
     border-radius: 0.3125rem;
     padding: .3125rem;
-    outline: none;
-    border: none;
-    border: 1px solid var(--destaque1);
+    outline-color: var(--destaque1);
+    border: 1px solid var(--subtitulo);
 }
 
 #textAreaPub:focus{
-    border: 1px solid var(--destaque1);
+    border: 1px solid transparent;
 }
 
 .container_btn_file_submit{
     /* background-color: #0000000c; */
     margin-top: .625rem;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    gap: .3125rem;
+}
+
+.container_selecionar_foto{
+    /* background-color: var(--bg_third); */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: center;
+    gap: .3125rem;
 }
 
 #label_file_pub{
@@ -491,6 +653,11 @@ main{
     
 #label_file_pub:hover{
     cursor: pointer;
+}
+
+#name_img_pub{
+    /* background-color: lightcoral; */
+    color: var(--secundaria);
 }
 
 #btn_submit_pub{
@@ -521,22 +688,18 @@ main{
     background-color: #FFF;
     width: 100%;
     margin: 3.125rem 0;
-    border: 1px solid var(--secundaria);
+    /* border: 1px solid var(--secundaria); */
+    border: 1px solid var(--bg_third);
     border-radius: 0.3125rem;
     padding: .625rem;
 }
 
 .info_pub{
-    /* background-color: lightcoral; */
     padding: .3125rem;
 }
 
-/* #container_pub p{
-    text-align: left;
-    color: var(--secundaria);
-} */
-
 .user_name_pub{
+    text-transform: capitalize;
     text-align: left;
     color: var(--secundaria);
     font-size: 1rem;
@@ -549,17 +712,19 @@ main{
     text-decoration: underline;
 }
 
+.title_pub{
+    text-align: left;
+    color: #272727;
+    /* color: var(--subtitulo); */
+    font-style: italic;
+    font-size: 1.125rem;
+    /* margin: .625rem 0; */
+}
+
 .date_pub{
     text-align: left;
     color: var(--subtitulo);
     font-size: .75rem;
-}
-
-.title_pub{
-    text-align: left;
-    color: #272727;
-    font-size: 1.125rem;
-    margin: .625rem 0;
 }
 
 #img_pub{
@@ -595,6 +760,7 @@ main{
 
 .container_section_profile{
     /* background-color: lightblue; */
+    /* position: relative; */
     padding: .625rem;
     /* max-width: 67.5rem; */
     max-width: 87.5rem;
@@ -618,6 +784,16 @@ main{
     width: 12.5rem;
     height: 12.5rem;
     object-fit: cover;
+}
+
+.info_user_profile{
+    color: rgb(52, 52, 173);
+    margin-top: .625rem;
+}
+
+.info_user_profile:hover{
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 #form_profilePic{
@@ -733,13 +909,27 @@ main{
 
 #publicacoes_user{
     color: var(--destaque1);
-    font-size: 1.125rem;
+    text-align: center;
     font-weight: bold;
+    margin: 2rem 0;
+}
+
+.publicacoes_user{
+    text-align: center;
+    color: var(--subtitulo);
+    font-size: 1.125rem;
+    /* font-weight: bold; */
     margin: 1.25rem 0;
 }
 
+#userName_publicacoes_user{
+    text-transform: capitalize;
+    color: var(--destaque1);
+}
+
 #container_pub_profile{
-    /* background-color: lightcoral; */
+    background-color: #fff;
+    border: 1px solid var(--bg_third);
     
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr));
@@ -750,8 +940,6 @@ main{
 }
 
 #pub_profile{
-    /* background-color: lightgoldenrodyellow; */
-    border: 1px solid var(--subtitulo);
     border-radius: .3125rem;
     display: flex;
     flex-direction: column;
@@ -760,10 +948,15 @@ main{
     padding: 1rem;
 }
 
+.container_info_pub{
+    width: 17.5rem;
+    text-align: left;
+}
+
 #img_pub_profile{
-    border: 1px solid var(--subtitulo);
-    width: 280px;
-    height: 280px;
+    border: 1px solid var(--bg_third);
+    width: 17.5rem;
+    height: 17.5rem;
     object-fit: cover;
 }
 

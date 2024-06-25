@@ -5,9 +5,10 @@ async function checkIfTokenIsValid(token) {
         throw new Error('Token inválido');
     }
     const jwtSecret = process.env.JWT_SECRET;
-    const validToken = await jwt.verify(token, jwtSecret);
+    const validToken = jwt.verify(token, jwtSecret);
     const userId = validToken.id_user;
-    return userId;
+    const userName = validToken.user_name;
+    return { userId, userName }
 }
 
 module.exports = { checkIfTokenIsValid }

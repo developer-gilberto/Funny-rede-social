@@ -8,8 +8,13 @@ window.document.addEventListener('scroll', () => {
     }
 });
 
+// function showValueInputFilePub() {
+//     document.querySelector('#name_img_pub').textContent = document.querySelector('#input_file_pub').value;
+// }
 function showValueInputFilePub() {
-    document.querySelector('#name_img_pub').textContent = document.querySelector('#input_file_pub').value;
+    var inputFile = document.querySelector('#input_file_pub');
+    var fileName = inputFile.files[0] ? inputFile.files[0].name : '';
+    document.querySelector('#name_img_pub').textContent = fileName;
 }
 
 function showValueInputFileProfilePic() {
@@ -19,6 +24,13 @@ function showValueInputFileProfilePic() {
 function showMenu() {
     document.querySelector('#menu_config_profile').classList.toggle('showMenu');
 }
+
+const itensMenu = document.querySelectorAll('.items_menu_profile');
+itensMenu.forEach(item => {
+    item.addEventListener('click', () => {
+        document.querySelector('#menu_config_profile').classList.toggle('showMenu');
+    });
+});
 
 function showFormEditProfile() {
     document.querySelector('#name_profilePic_profile').textContent = '';

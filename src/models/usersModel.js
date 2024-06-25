@@ -2,7 +2,8 @@ const connection = require('../db/connection');
 
 const getUserByEmail = async (userEmail) => {
     try {
-        const user = await connection.execute('SELECT * FROM users WHERE user_email = ?', [userEmail]);
+        const query = 'SELECT id_user, user_name, user_email, profile_pic, creation_date FROM users WHERE user_email = ?'
+        const user = await connection.execute(query, [userEmail]);
         return user;
     } catch (err) {
         console.error(err);
@@ -12,7 +13,19 @@ const getUserByEmail = async (userEmail) => {
 
 const getUserById = async (idUser) => {
     try {
-        const user = await connection.execute('SELECT * FROM users WHERE id_user = ?', [idUser]);
+        const query = 'SELECT id_user, user_name, user_email, profile_pic, creation_date FROM users WHERE id_user = ?'
+        const user = await connection.execute(query, [idUser]);
+        return user;
+    } catch (err) {
+        console.error(err);
+        throw new Error;
+    }
+}
+
+const getUserByUserProfileName = async (userProfileName) => {
+    try {
+        const query = 'SELECT id_user, user_name, user_email, profile_pic, creation_date FROM users WHERE user_name = ?'
+        const user = await connection.execute(query, [userProfileName]);
         return user;
     } catch (err) {
         console.error(err);
@@ -22,7 +35,8 @@ const getUserById = async (idUser) => {
 
 const searchEmailDB = async (userEmail) => {
     try {
-        const [ queryResult ] = await connection.execute('SELECT user_email FROM users WHERE user_email = ?', [userEmail]);
+        const query = 'SELECT user_email FROM users WHERE user_email = ?'
+        const [ queryResult ] = await connection.execute(query, [userEmail]);
         return queryResult;
     } catch (err) {
         console.error(err);
@@ -30,9 +44,10 @@ const searchEmailDB = async (userEmail) => {
     }
 }
 
-const searchPasswordDB = async (userEmail) => {
+const getPasswordDB = async (userEmail) => {
     try {
-        const [queryResult] = await connection.execute('SELECT user_password FROM users WHERE user_email = ?', [userEmail]);
+        const query = 'SELECT user_password FROM users WHERE user_email = ?'
+        const [ queryResult ] = await connection.execute(query, [userEmail]);
         const encryptedPassword = queryResult[0].user_password;
         return encryptedPassword;
     } catch (err) {
@@ -52,10 +67,10 @@ const insertUserDB = async (userName, userEmail, encryptedPassword, creationDate
     }
 }
 
-const insertPubDB = async (userId, textPub, imgPubName, creationDatePub) => {
-    const query = 'INSERT INTO pubs VALUES (DEFAULT, ?, ?, ?, ?)';
+const insertPubDB = async (userId, userName, textPub, imgPubName, creationDatePub) => {
+    const query = 'INSERT INTO pubs VALUES (DEFAULT, ?, ?, ?, ?, ?)';
     try {
-        const result = await connection.execute(query, [userId, textPub, imgPubName, creationDatePub]);
+        const result = await connection.execute(query, [userId, userName, textPub, imgPubName, creationDatePub]);
         return result;
     } catch (err) {
         console.log(err);
@@ -64,14 +79,8 @@ const insertPubDB = async (userId, textPub, imgPubName, creationDatePub) => {
 }
 
 const getPubsByUserId = async (userId) => {
-    const query = `
-        SELECT pubs.id_pub, pubs.text_pub, pubs.img_pub, pubs.date_pub
-        FROM pubs
-        INNER JOIN users ON pubs.id_user = users.id_user
-        WHERE users.id_user = ?
-        ORDER BY date_pub DESC
-    `
     try {
+        const query = 'SELECT * FROM pubs WHERE id_user = ? ORDER BY date_pub DESC'
         const pubs = await connection.execute(query, [userId]);
         return pubs;
     } catch (err) {
@@ -102,14 +111,52 @@ const updateUserNameDB = async (userId, newProfileName) => {
     }
 }
 
+const getAllUsersByNameProfile = async (nameProfile) => {
+    const query = 'SELECT id_user, user_name, user_email, profile_pic, creation_date FROM users WHERE user_name LIKE ?';
+    const values = [`${nameProfile}%`];
+    try {
+        const user = await connection.execute(query, values);
+        return user;
+    } catch (err) {
+        console.error(err);
+        throw new Error;
+    }
+}
+
+const insertRequestFriendshipDB = async (idUser, idFriend) => {
+    const query = 'INSERT IGNORE INTO friendships VALUES (?, ?, ?, ?)';
+    try {
+        const result = await connection.execute(query, [idUser, idFriend, false, null]);
+        return result;
+    } catch (err) {
+        console.log(err);
+        throw new Error;
+    }
+}
+
+const getFriendshipById = async (userId, idFriend) => {
+    try {
+        const query = `SELECT * FROM friendships WHERE id_user = ? AND id_friend = ?`
+        const friendship = await connection.execute(query, [userId, idFriend]);
+        return friendship;
+    } catch (err) {
+        console.error(err);
+        throw new Error;
+    }
+}
+
 module.exports = {
     getUserByEmail,
     getUserById,
+    getUserByUserProfileName,
     insertUserDB,
     searchEmailDB,
-    searchPasswordDB,
+    getPasswordDB,
     insertPubDB,
     getPubsByUserId,
     updateProfilePicDB,
-    updateUserNameDB
+    updateUserNameDB,
+    getAllUsersByNameProfile,
+    insertRequestFriendshipDB,
+    getFriendshipById
 }

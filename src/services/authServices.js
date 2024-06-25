@@ -6,9 +6,11 @@ const authenticateUser = async (req, res, next) => {
     const jwtSecret = process.env.JWT_SECRET;
     try {
         const [ user ] = await usersModel.getUserByEmail(userEmail);
-        const userId = user[0].id_user;
         const token = jwt.sign(
-            {id_user: userId},
+            {
+                id_user: user[0].id_user,
+                user_name: user[0].user_name
+            },
             jwtSecret,
             {expiresIn: 3600} // 1 hora
             //{expiresIn: 30} // 30s
@@ -40,7 +42,8 @@ const authorizeUser = async (req, res, next) => {
         return next();
     } catch (err) {
         console.error(err);
-        return res.status(500).send(`Esta página é restrita. <br>Para acessar, é necessário fazer <a href="/">Login</a>.`);
+        return res.status(401).render('pages/invalidToken');
+        // return res.status(500).send(`Esta página é restrita. <br>Para acessar, é necessário fazer <a href="/">Login</a>.`);
     }
 }
 

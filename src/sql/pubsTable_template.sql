@@ -1,6 +1,7 @@
 CREATE TABLE pubs (
     id_pub INT AUTO_INCREMENT PRIMARY KEY,
     id_user INT NOT NULL,
+    user_name VARCHAR(255) NOT NULL,
     text_pub TEXT,
     img_pub VARCHAR(255),
     date_pub VARCHAR(255),

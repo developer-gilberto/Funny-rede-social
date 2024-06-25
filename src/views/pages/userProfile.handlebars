@@ -1,0 +1,46 @@
+<section class="container_section_profile">
+    <div class="container_profile_pic">
+        <img id="profilePic_profile"
+            {{#if user.profile_pic}}
+                src="/profilePic/{{user.profile_pic}}"
+            {{else}}
+                src="/assets/img/defaultProfileImg.png"
+            {{/if}}
+        alt="Ops, imagem não encontrada :(">
+        <h1><strong id="profileName" class="welcome_user_name">{{user.user_name}}</strong></h1>
+
+        {{#if friendship}}
+            <a class="info_user_profile">{{friendship}}</a>
+        {{else}}
+            <a class="info_user_profile" href="/addFriend?id_friend={{user.id_user}}">+ Adicionar amigo</a>
+        {{/if}}
+{{!-- <a href="/sendMessage">Mensagem</a> --}}
+        <a class="info_user_profile">
+            <i class="icons_menu ri-question-answer-line"></i>
+            Mensagem
+        </a>
+    </div>
+
+    {{#if pubs}}
+        <p id="publicacoes_user" class="publicacoes_user">Publicações:</p>
+    {{else}}
+        <div style="text-align: center;">
+            <p class="publicacoes_user">Por enquanto, <strong id="userName_publicacoes_user">{{user.user_name}}</strong> não tem nenhuma publicação...</p>
+            <img src="/assets/gifs/john_travolta.gif">
+        </div>
+    {{/if}}
+    <ul id="container_pub_profile">
+        {{#each pubs}}
+            <li id="pub_profile">
+                <div class="container_info_pub">
+                    <p class="title_pub">{{text_pub}}</p>
+                    <p class="date_pub">{{date_pub}}</p>
+                </div>
+                {{#if img_pub}}
+                    <img id="img_pub_profile" src="/imgPub/{{img_pub}}" alt="Ops, imagem não encontrada :(">
+                {{/if}}
+            </li>
+        {{/each}}
+    </ul>
+    <i onclick="goTop()" class="btn_go_top ri-arrow-up-s-line"></i>
+</section>

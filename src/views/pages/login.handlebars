@@ -9,9 +9,12 @@
     </div>
     <form id="form_login" action="/login" method="post">
         <h2>Login</h2>
-        <input class="inputs_email_senha" type="email" name="userEmail" placeholder="Email">
-        <input class="inputs_email_senha" type="password" name="userPassword" placeholder="Senha">
-        <a class="btn_criar_conta" href="/createAccount">Criar conta</a>
+        <input class="inputs_email_senha" type="email" name="userEmail" placeholder="Email" required>
+        <input class="inputs_email_senha" type="password" name="userPassword" placeholder="Senha" required>
+        <div>
+            <p class="nao_tem_conta_funny">Não tem conta na Funny?</p>
+            <a class="btn_criar_conta" href="/createAccount">Criar conta</a>
+        </div>
         <input class="btn_submit_login" type="submit" value="Entrar">
     </form>
 </section>
