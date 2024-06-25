@@ -259,6 +259,22 @@ const searchAllUsersDB = async (req, res, next) => {
     }
 }
 
+const checkFriendRequest = async (req, res, next) => {
+    const token = req.cookies.auth_token;
+
+    try {
+        const { userId } = await authServices.checkIfTokenIsValid(token);
+
+        let [ friendship ] = await usersModel.checkIsFriendRequest(userId);
+        req.friendship = friendship;
+
+        return next();
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send('Algo deu errado :( <br>Tente novamente mais tarde. <br>' + err);
+    }
+}
+
 module.exports =  {
     checkIfEmailInUse,
     checkIfAccountExist,
@@ -274,5 +290,6 @@ module.exports =  {
     getUserProfilePubsDB,
     searchAllUsersDB,
     sendRequestFriendship,
-    getDataFriendship
+    getDataFriendship,
+    checkFriendRequest
  }

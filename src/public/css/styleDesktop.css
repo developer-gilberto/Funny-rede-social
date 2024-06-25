@@ -579,10 +579,116 @@ main{
     right: .625rem;
 
     display: flex;
-    justify-content: right;
+    /* justify-content: right; */
+    justify-content: center;
     align-items: center;
     gap: .625rem;
     /* background-color: lightcoral; */
+}
+
+.list_notifications{
+    /* background-color: lightblue; */
+    border: 1px solid var(--bg_third);
+    text-align: right;
+    display: none;
+    padding: .3125rem;
+    margin-bottom: 1.25rem;
+}
+
+.list_notifications.showNotifications{
+    display: block;
+}
+
+#icon_close_notifications{
+    color: var(--destaque1);
+    font-size: 25px;
+    text-align: right;
+}
+
+#icon_close_notifications:hover{
+    cursor: pointer;
+    color: var(--secundaria);
+}
+
+.list_notifications li{
+    background-color: var(--bg_third);
+    text-align: left;
+    border-radius: .3125rem;
+    padding: .625rem 1.25rem;
+    /* text-align: left; */
+    margin: 1.25rem;
+}
+
+.container_img_userName_notification{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: .3125rem;
+}
+
+#img_notifications{
+    width: 2.5rem;
+    height: 2.5rem;
+    object-fit: cover;
+    border: 1px solid var(--subtitulo);
+    border-radius: 50%;
+    /* transition: .1s ease; */
+}
+
+.user_name_notification{
+    color: var(--destaque1);
+}
+
+.container_btn_acceptFriend{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 1.25rem;
+    margin-top: .625rem;
+}
+
+.btn_acceptFriend{
+    background-color: var(--destaque1);
+    color: var(--branco);
+    border-radius: .3125rem;
+    padding: .1875rem .625rem;
+}
+
+.btn_acceptFriend:hover{
+    cursor: pointer;
+    background-color: var(--secundaria);
+}
+
+#btn_rejectFriend{
+    background-color: var(--subtitulo);
+    border: 1px solid transparent;
+}
+
+#btn_rejectFriend:hover{
+    background-color: var(--subtitulo);
+    border: 1px solid var(--secundaria);
+}
+
+.icon_notification_true{
+    color: var(--destaque1);
+    font-size: 1.125rem;
+    margin-right: .3125rem;
+}
+
+.icon_notification_true:hover{
+    cursor: pointer;
+    color: var(--secundaria);
+}
+
+.icon_notification_false{
+    color: var(--subtitulo);
+    font-size: 1.125rem;
+    margin-right: .3125rem;
+}
+
+.icon_notification_false:hover{
+    cursor: pointer;
+    color: var(--destaque1);
 }
 
 .container_userName_header .user_name{

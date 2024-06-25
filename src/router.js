@@ -14,11 +14,12 @@ router.get("/createAccount",
 
 router.get("/myProfile",
     authServices.authorizeUser,
-    usersController.loadUserProfile
+    usersController.loadMyProfile
 );
 
 router.get("/home",
     authServices.authorizeUser,
+    usersMiddleware.checkFriendRequest,
     usersController.loadUserHome
 );
 

@@ -24,6 +24,7 @@ const redirectMyProfile = (req, res) => {
 }
 
 const loadUserHome = async (req, res) => {
+
     const token = req.cookies.auth_token;
     try {
         const { userId } = await authServices.checkIfTokenIsValid(token);
@@ -31,14 +32,20 @@ const loadUserHome = async (req, res) => {
         const user = queryResult[0];
         const [ queryResultPubs ] = await usersModel.getPubsByUserId(userId);
         const pubs = queryResultPubs;
-        res.render('pages/home', { user, pubs });
+
+        let friendship = req.friendship;
+        if (friendship.length == 0) {
+            return res.render('pages/home', { user, pubs, notification: false });
+        }
+        return res.render('pages/home', { user, pubs, friendship, notification: true });
+        
     } catch (err) {
         console.error(err);
         return res.status(500).send('Algo deu errado :( <br>Tente novamente mais tarde. <br>' + err);
     }
 }
 
-const loadUserProfile = async (req, res) => {
+const loadMyProfile = async (req, res) => {
     const token = req.cookies.auth_token;
     try {
         const { userId } = await authServices.checkIfTokenIsValid(token);
@@ -104,7 +111,7 @@ module.exports = {
     redirectUserHome,
     redirectMyProfile,
     loadUserHome,
-    loadUserProfile,
+    loadMyProfile,
     loadCreateAccount,
     renderUserProfile,
     renderFoundProfiles,

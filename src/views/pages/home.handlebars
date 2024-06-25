@@ -1,6 +1,11 @@
 <section class="container_section_home">
     {{#if user}}
         <div class="container_userName_header">
+            {{#if notification}}
+                <i onclick="showNotifications()" class="icon_notification_true ri-notification-2-fill"></i>
+            {{else}}
+                <i class="icon_notification_false ri-notification-2-line"></i>
+            {{/if}}
             <strong class="user_name">{{user.user_name}}</strong> 
             <img onclick="showMenu()" id="profilePic_header"
                 {{#if user.profile_pic}}
@@ -11,6 +16,29 @@
             alt="Ops, imagem não encontrada :(">
         </div>
     {{/if}}
+
+    {{!-- showNotifications --}}
+    <ul class="list_notifications">
+        <i onclick="showNotifications()" id="icon_close_notifications" class="ri-close-line"></i>
+        {{#each friendship}}
+            <li>
+                <div class="container_img_userName_notification">
+                    <img id="img_notifications"
+                        {{#if profile_pic}}
+                            src="/profilePic/{{profile_pic}}"
+                        {{else}}
+                            src="/assets/img/defaultProfileImg.png"
+                        {{/if}}
+                    alt="Foto...">
+                    <p><strong class="user_name_notification"> {{user_name}} </strong>enviou solicitação de amizade para você.</p>
+                </div>
+                <div class="container_btn_acceptFriend">
+                    <a class="btn_acceptFriend" href="/acceptFriend?id_user={{id_user}}">Aceitar</a>
+                    <a id="btn_rejectFriend" class="btn_acceptFriend" href="/notAcceptFriend?id_user={{id_user}}">Recusar</a>
+                </div>
+            </li>
+        {{/each}}
+    </ul>
 
     <ul id="menu_config_profile">
         <li class="items_menu_profile">

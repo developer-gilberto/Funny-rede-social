@@ -25,6 +25,10 @@ function showMenu() {
     document.querySelector('#menu_config_profile').classList.toggle('showMenu');
 }
 
+function showNotifications() {
+    document.querySelector('.list_notifications').classList.toggle('showNotifications');
+}
+
 const itensMenu = document.querySelectorAll('.items_menu_profile');
 itensMenu.forEach(item => {
     item.addEventListener('click', () => {

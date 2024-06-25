@@ -145,6 +145,20 @@ const getFriendshipById = async (userId, idFriend) => {
     }
 }
 
+const checkIsFriendRequest = async (userId) => {
+    try {
+        const query = `SELECT DISTINCT u.id_user, u.user_name, u.user_email, u.profile_pic, u.creation_date
+                        FROM users u
+                        INNER JOIN friendships f ON u.id_user = f.id_user
+                        WHERE f.id_friend = ? AND f.friendship = 0`
+        const friendship = await connection.execute(query, [userId]);
+        return friendship;
+    } catch (err) {
+        console.error(err);
+        throw new Error;
+    }
+}
+
 module.exports = {
     getUserByEmail,
     getUserById,
@@ -158,5 +172,6 @@ module.exports = {
     updateUserNameDB,
     getAllUsersByNameProfile,
     insertRequestFriendshipDB,
-    getFriendshipById
+    getFriendshipById,
+    checkIsFriendRequest
 }
