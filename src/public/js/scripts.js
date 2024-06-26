@@ -29,6 +29,10 @@ function showNotifications() {
     document.querySelector('.list_notifications').classList.toggle('showNotifications');
 }
 
+function noFriendRequests() {
+    document.querySelector('#noFriendRequests').classList.toggle('showNoFriendRequests');
+}
+
 const itensMenu = document.querySelectorAll('.items_menu_profile');
 itensMenu.forEach(item => {
     item.addEventListener('click', () => {

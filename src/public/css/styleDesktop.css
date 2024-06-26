@@ -391,10 +391,17 @@ main{
     background-color: var(--branco);
     border: 1px solid var(--secundaria);
     padding: 1.25rem;
+
     position: absolute;
-    top: 3.8125rem;
-    right: -18.75rem;
+    top: -100%;
+    /* right: -18.75rem; */
+    right: 0;
     transition: .3s ease;
+}
+
+#menu_config_profile.showMenu{
+    /* right: 0; */
+    top: 3.8125rem;
 }
 
 .items_menu_profile{
@@ -426,10 +433,6 @@ main{
     cursor: pointer;
     color: var(--destaque1);
 }
-    
-#menu_config_profile.showMenu{
-    right: 0;
-}
 
 .select_img_icon{
     color: var(--destaque1);
@@ -443,6 +446,30 @@ main{
     max-width: 43.75rem;
     margin: 0 auto;
     min-height: 100vh;
+}
+
+#noFriendRequests{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--destaque1);
+    margin-bottom: 1.25rem;
+
+    position: absolute;
+    top: -100%;
+    right: 0;
+
+    /* background-color: var(--bg_third); */
+    background-color: #e6e6e6;
+    text-align: left;
+    border-radius: .3125rem;
+    padding: .625rem 1.25rem;
+}
+
+#noFriendRequests.showNoFriendRequests{
+    /* display: flex; */
+    top: 61px;
+    right: 0;
 }
 
 #form_searchProfileDB{
@@ -495,6 +522,12 @@ main{
 .container_section_foundProfiles{
     max-width: 45rem;
     margin: 0 auto;
+}
+
+.section_notAcceptTerms{
+    max-width: 45rem;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .h2_foundProfile{
@@ -587,16 +620,23 @@ main{
 }
 
 .list_notifications{
-    /* background-color: lightblue; */
+    background-color: var(--bg_primary);
     border: 1px solid var(--bg_third);
     text-align: right;
-    display: none;
+    /* display: none; */
     padding: .3125rem;
     margin-bottom: 1.25rem;
+
+    position: absolute;
+    top: -100%;
+    right: 0;
+    transition: .2s ease;
 }
 
 .list_notifications.showNotifications{
-    display: block;
+    /* display: block; */
+    top: 61px;
+    right: 0;
 }
 
 #icon_close_notifications{
@@ -673,11 +713,26 @@ main{
     color: var(--destaque1);
     font-size: 1.125rem;
     margin-right: .3125rem;
+
+    animation: animaSino .8s linear infinite alternate-reverse;
 }
 
 .icon_notification_true:hover{
     cursor: pointer;
     color: var(--secundaria);
+}
+
+@keyframes animaSino{
+    0% {
+        /* filter: drop-shadow(0px 0px 1px var(--preto)); */
+        /* transform: rotate(30deg); */
+        transform: scale(1);
+      }
+      100% {
+        /* filter: drop-shadow(0px 0px 10px var(--preto)); */
+        /* transform: rotate(-30deg); */
+        transform: scale(1.2);
+      }
 }
 
 .icon_notification_false{
@@ -696,6 +751,18 @@ main{
     text-transform: uppercase;
     font-size: 18px;
     font-weight: bold;
+}
+
+.container_icon_friendRequest{
+    position: relative;
+    margin-right: 1.25rem;
+}
+
+#numberFriendRequest{
+    color: var(--subtitulo);
+    position: absolute;
+    top: -15px;
+    right: -5px;
 }
 
 .default_icon{

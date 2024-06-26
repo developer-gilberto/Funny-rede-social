@@ -5,7 +5,10 @@ const path = require('path');
 
 const checkIfEmailInUse = async (req, res, next) => {
     const { userEmail, checkBoxCreateAccount } = req.body;
-    console.log('checkBoxCreateAccount: ', checkBoxCreateAccount);
+    
+    if (!checkBoxCreateAccount) {
+        return res.render('pages/notAcceptTermsFunny');
+    }
     if (!userEmail) {
         return res.status(400).send(`EMAIL ou SENHA inválido. <br> Verifique os dados e tente novamente.`);
     }
@@ -265,9 +268,25 @@ const checkFriendRequest = async (req, res, next) => {
     try {
         const { userId } = await authServices.checkIfTokenIsValid(token);
 
-        let [ friendship ] = await usersModel.checkIsFriendRequest(userId);
-        req.friendship = friendship;
+        let [ friendships ] = await usersModel.checkIsFriendRequest(userId);
+        
+        req.friendships = friendships;
 
+        return next();
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send('Algo deu errado :( <br>Tente novamente mais tarde. <br>' + err);
+    }
+}
+
+const acceptRequestFriendship = async (req, res, next) => {
+    const idFriend = req.query.id_user;
+    const token = req.cookies.auth_token;
+    const friendshipDate = new Date();
+
+    try {
+        const { userId } = await authServices.checkIfTokenIsValid(token);
+        await usersModel.updateFriendshipDB(userId, idFriend, friendshipDate);
         return next();
     } catch (err) {
         console.error(err);
@@ -291,5 +310,6 @@ module.exports =  {
     searchAllUsersDB,
     sendRequestFriendship,
     getDataFriendship,
-    checkFriendRequest
+    checkFriendRequest,
+    acceptRequestFriendship
  }

@@ -14,6 +14,14 @@
         {{else}}
             <a class="info_user_profile" href="/addFriend?id_friend={{user.id_user}}">+ Adicionar amigo</a>
         {{/if}}
+
+        {{#if friendRequest}}
+            <div class="container_btn_acceptFriend">
+                <a class="btn_acceptFriend" href="/acceptFriend?id_user={{user.id_user}}">Aceitar</a>
+                <a id="btn_rejectFriend" class="btn_acceptFriend" href="/notAcceptFriend?id_user={{user.id_user}}">Recusar</a>
+            </div>
+        {{/if}}
+
 {{!-- <a href="/sendMessage">Mensagem</a> --}}
         <a class="info_user_profile">
             <i class="icons_menu ri-question-answer-line"></i>

@@ -134,10 +134,24 @@ const insertRequestFriendshipDB = async (idUser, idFriend) => {
     }
 }
 
+const updateFriendshipDB = async (userId, idFriend, friendshipDate) => {
+    const query = `UPDATE friendships
+                    SET friendship = ?, friendship_date = ?
+                    WHERE id_user = ? AND id_friend = ? OR id_user = ? AND id_friend = ?`
+
+    try {
+        await connection.execute(query, [true, friendshipDate, userId, idFriend, idFriend, userId]);
+    } catch (err) {
+        console.log(err);
+        throw new Error;
+    }
+}
+
 const getFriendshipById = async (userId, idFriend) => {
     try {
-        const query = `SELECT * FROM friendships WHERE id_user = ? AND id_friend = ?`
-        const friendship = await connection.execute(query, [userId, idFriend]);
+        // const query = `SELECT * FROM friendships WHERE id_user = ? AND id_friend = ?`
+        const query = `SELECT * FROM friendships WHERE id_user = ? AND id_friend = ? OR id_user = ? AND id_friend = ?`
+        const friendship = await connection.execute(query, [userId, idFriend, idFriend, userId]);
         return friendship;
     } catch (err) {
         console.error(err);
@@ -173,5 +187,6 @@ module.exports = {
     getAllUsersByNameProfile,
     insertRequestFriendshipDB,
     getFriendshipById,
-    checkIsFriendRequest
+    checkIsFriendRequest,
+    updateFriendshipDB
 }

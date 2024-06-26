@@ -33,11 +33,15 @@ const loadUserHome = async (req, res) => {
         const [ queryResultPubs ] = await usersModel.getPubsByUserId(userId);
         const pubs = queryResultPubs;
 
-        let friendship = req.friendship;
-        if (friendship.length == 0) {
-            return res.render('pages/home', { user, pubs, notification: false });
+        let friendships = req.friendships;
+        const numberFriendRequest = friendships.length;
+        
+        if (friendships.length == 0) {
+            // return res.render('pages/home', { user, pubs, notification: false });
+            return res.render('pages/home', { user, pubs, friendships });
         }
-        return res.render('pages/home', { user, pubs, friendship, notification: true });
+        // return res.render('pages/home', { user, pubs, friendships, notification: true });
+        return res.render('pages/home', { user, pubs, friendships, numberFriendRequest });
         
     } catch (err) {
         console.error(err);
@@ -71,6 +75,10 @@ const renderUserProfile = async (req, res) => {
     try {
         if (friendship.length > 0) {
 
+            if (friendship[0].friendship === 0 && friendship[0].id_user == user.id_user) {
+                const friendRequest = true;
+                return res.status(200).render('pages/userProfile', { user, pubs, friendRequest, friendship: 'Enviou solicitação de amizade para você.' });
+            }
             if (friendship[0].friendship === 0) {
                 return res.status(200).render('pages/userProfile', { user, pubs, friendship: 'Solicitação de amizade enviada...' });
             }

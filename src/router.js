@@ -78,4 +78,10 @@ router.get("/addFriend",
     usersController.redirectUserProfile
 );
 
+router.get("/acceptFriend",
+    authServices.authorizeUser,
+    usersMiddleware.acceptRequestFriendship,
+    usersController.redirectUserHome
+);
+
 module.exports = router;
