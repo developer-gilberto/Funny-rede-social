@@ -1,11 +1,11 @@
 # Funny®
 ## A rede social divertida.
+<img width="1387" height="923" alt="Screenshot From 2026-01-03 10-50-19" src="https://github.com/user-attachments/assets/b8916ac5-c989-4e74-807e-f42c0d9ba869" />
+<img width="1174" height="597" alt="Screenshot From 2026-01-02 23-47-29" src="https://github.com/user-attachments/assets/68007f70-ac38-4965-9d9b-27cbf36e34cb" />
+<img width="882" height="758" alt="Screenshot From 2026-01-02 21-13-30" src="https://github.com/user-attachments/assets/23634c84-de9b-4baf-8375-7ef7782a1bfc" />
+<img width="357" height="735" alt="Screenshot From 2026-01-03 10-40-42" src="https://github.com/user-attachments/assets/6d979631-44e3-493f-a00d-c4a3926335e4" />
+<img width="350" height="862" alt="Screenshot From 2026-01-03 10-49-28" src="https://github.com/user-attachments/assets/f2d5a3d2-259e-4e56-a717-bf35f501c0de" />
 
-Exceto conforme expressamente estabelecido de outra forma por escrito, o titular dos direitos autorais deste software e qualquer outra pessoa que controle os direitos autorais reserva todos os direitos a respeito do software distribuído.
-
-Nenhuma permissão é concedida para cópia, distribuição, modificação ou sublicenciamento do software. O uso comercial deste software requer uma licença comercial válida emitida pelo titular dos direitos autorais.
-
-Para obter permissão, entre em contato com o criador e desenvolvedor da Funny® Gilberto Lopes developer.gilberto@gmail.com
 
 ---
 
@@ -440,12 +440,12 @@ npm start
 
 ### Medidas Implementadas
 
-✅ Prepared statements (proteção contra SQL Injection)
-✅ Senhas criptografadas com bcryptjs (hash + salt)
-✅ Autenticação baseada em JWT
-✅ Tokens armazenados em cookies HTTP-only
-✅ Validação de entrada de dados
-✅ Verificação de autenticação em rotas protegidas
+- ✅ Prepared statements (proteção contra SQL Injection)
+- ✅ Senhas criptografadas com bcryptjs (hash + salt)
+- ✅ Autenticação baseada em JWT
+- ✅ Tokens armazenados em cookies HTTP-only
+- ✅ Validação de entrada de dados
+- ✅ Verificação de autenticação em rotas protegidas
 
 
 ---
@@ -469,6 +469,12 @@ npm start
 - Email: developer.gilberto@gmail.com
 
 ---
+
+Exceto conforme expressamente estabelecido de outra forma por escrito, o titular dos direitos autorais deste software e qualquer outra pessoa que controle os direitos autorais reserva todos os direitos a respeito do software distribuído.
+
+Nenhuma permissão é concedida para cópia, distribuição, modificação ou sublicenciamento do software. O uso comercial deste software requer uma licença comercial válida emitida pelo titular dos direitos autorais.
+
+Para obter permissão, entre em contato com o criador e desenvolvedor da Funny® Gilberto Lopes developer.gilberto@gmail.com
 
 ## Funny®
 ### All Rights Reserved ®
