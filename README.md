@@ -453,20 +453,22 @@ npm start
 ## 📈 Implementações Futuras
 
 - [ ] Sistema de curtidas e comentários em publicações
-- [ ] Feed com publicações de amigos
+- [ ] Edição e exclusão de publicações
 - [ ] Chat em tempo real
 - [ ] Notificações em tempo real
-- [ ] Edição e exclusão de publicações
-- [ ] Testes automatizados (Jest)
-- [ ] API REST para mobile
 - [ ] Upload de vídeos
 
 ---
 
-## 👨‍💻 Autor
+## 👨‍💻 Saiba mais sobre o desenvolvedor
 
 **Gilberto Lopes**
-- Email: developer.gilberto@gmail.com
+
+-   Email: developer.gilberto@gmail.com
+-   [Site pessoal](https://gilbertolopes.dev)
+-   [LinkedIn](https://linkedin.com/in/gilbertolopes-dev)
+-   [GitHub](https://github.com/developer-gilberto)
+-   [Instagran](https://www.instagram.com/developer.gilberto/)
 
 ---
 
@@ -480,6 +482,3 @@ Para obter permissão, entre em contato com o criador e desenvolvedor da Funny®
 ### All Rights Reserved ®
 ### © Copy Right
 ### Todos os Direitos Reservados
-
-**Versão:** 1.0.0  
-**Última atualização:** 2024
