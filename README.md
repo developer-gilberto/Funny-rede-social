@@ -1,35 +1,40 @@
-# Funny®
-## A rede social divertida.
+# Funny® - A rede social divertida.
+## Sobre o Projeto
+
+**Funny** é uma rede social que permite aos usuários fazer publicações com texto e/ou imagens, buscar por outros usuários, conectar-se com amigos e interagir em uma plataforma social “clean” e divertida. Desenvolvida usando JavaScript, Node.js, Express e Handlebars.
+
+---
+
+<img width="432" height="331" alt="Screenshot From 2026-01-23 13-57-07" src="https://github.com/user-attachments/assets/a45f33f9-265a-4c19-a4fe-cf0d7c6a384e" />
+
+## Receba notificações de amizade
 <img width="1387" height="923" alt="Screenshot From 2026-01-03 10-50-19" src="https://github.com/user-attachments/assets/b8916ac5-c989-4e74-807e-f42c0d9ba869" />
-<img width="1174" height="597" alt="Screenshot From 2026-01-02 23-47-29" src="https://github.com/user-attachments/assets/68007f70-ac38-4965-9d9b-27cbf36e34cb" />
-<img width="882" height="758" alt="Screenshot From 2026-01-02 21-13-30" src="https://github.com/user-attachments/assets/23634c84-de9b-4baf-8375-7ef7782a1bfc" />
-<img width="357" height="735" alt="Screenshot From 2026-01-03 10-40-42" src="https://github.com/user-attachments/assets/6d979631-44e3-493f-a00d-c4a3926335e4" />
+
+## Veja suas publicações
+<img width="1126" height="861" alt="pubs" src="https://github.com/user-attachments/assets/6f9b3b96-d6c3-4503-a8d3-659e05221c3b" />
+
+## Edite seu perfil
+<img width="501" height="593" alt="perf-edit" src="https://github.com/user-attachments/assets/f50dc3dc-57f7-41fe-a8e0-ae04e583b9d1" />
+
+## Encontre pessoas
+<img width="836" height="406" alt="encontre" src="https://github.com/user-attachments/assets/6ea82101-ecc6-43bb-9683-fa03f6d9a9dc" />
+
+## Adicione amigos
 <img width="350" height="862" alt="Screenshot From 2026-01-03 10-49-28" src="https://github.com/user-attachments/assets/f2d5a3d2-259e-4e56-a717-bf35f501c0de" />
 
+## Responsividade para dispositivos móveis
+<img width="357" height="735" alt="Screenshot From 2026-01-03 10-40-42" src="https://github.com/user-attachments/assets/6d979631-44e3-493f-a00d-c4a3926335e4" />
+<img width="351" height="727" alt="mob" src="https://github.com/user-attachments/assets/bc4f1988-97a4-4bb9-8cc9-2dbba0af9869" />
+
+## Feed "clean"
+<img width="1174" height="597" alt="Screenshot From 2026-01-02 23-47-29" src="https://github.com/user-attachments/assets/68007f70-ac38-4965-9d9b-27cbf36e34cb" />
+
+## Login
+<img width="882" height="758" alt="Screenshot From 2026-01-02 21-13-30" src="https://github.com/user-attachments/assets/23634c84-de9b-4baf-8375-7ef7782a1bfc" />
+
 
 ---
 
-## 📋 Índice
-
-- [Sobre o Projeto](#-sobre-o-projeto)
-- [Tecnologias Utilizadas](#-tecnologias-utilizadas)
-- [Funcionalidades](#-funcionalidades)
-- [Estrutura do Projeto](#-estrutura-do-projeto)
-- [Pré-requisitos](#-pré-requisitos)
-- [Instalação e Execução](#-instalação-e-execução)
-- [Configuração](#-configuração)
-- [Banco de Dados](#-banco-de-dados)
-- [Rotas da Aplicação](#-rotas-da-aplicação)
-- [Estrutura de Arquivos](#-estrutura-de-arquivos)
-- [Autor](#-autor)
-
----
-
-## 🎯 Sobre o Projeto
-
-**Funny** é uma rede social desenvolvida com Node.js e Express que permite aos usuários criar perfis, fazer publicações com texto e imagens, conectar-se com amigos e interagir em uma plataforma social moderna e divertida.
-
----
 
 ## 🚀 Tecnologias Utilizadas
 
